@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   helper_method :current_user
-  filter_parameter_logging :social_security_number, :password, :credit_card_number, :ssn
+  # filter_parameter_logging :social_security_number, :password, :credit_card_number, :ssn
   
   
   private
