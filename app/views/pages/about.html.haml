@@ -1,0 +1,28 @@
+.grid_12
+  %h1 About URLAgg
+
+  %p 
+    URLAgg was designed to help me scratch an itch. Sometime around March 2009 I decided I need to take some time off from
+    RSS, I was tracking well over 500 blogs from the .NET, Ruby, Rails and personal productivity space (incessant blog
+    reading does not make you any more productive, quite the opposite actually) as well as a smattering of other blogs. It
+    would get to the point where I'd skim a few hundred posts every few hours and look for one to catch my eye, read it, then
+    mark the rest as read. I felt compelled to check them, balloon messages be damned.
+
+  %p 
+    So I stopped and for a few weeks all was fine.  Then I started needing an information fix and would hit del.icio.us/popular 
+    and search through some tags that interested me looking for pages I hadn't seen before.  This quickly got out of hand and I 
+    was doing this several times a day, 15-30 minutes a pop.  Something had to give.
+
+  %p
+    Enter URLAgg, a link aggregator.  This one lets you choose some tags you'd like to track, say 
+    == This one lets you choose some tags you'd like to track, say #{link_to 'ruby', '/tags/ruby'}, #{link_to 'rails', '/tags/rails'} and #{link_to 'gtd', '/tags/gtd'} and provides you several interfaces to find new data:
+
+  %ol
+    %li The web, browsing your tracked tags you'll only see new links since your last visit.
+    %li A feed for all your tracked tags, or a single tag, that is updated with each new link we find
+    %li A summary feed for all your tracked tags, or a single tag, that is updated  when your reader requests it, if we've found new links
+  
+  %p 
+    Hopefully, targetting only popular links in tags you're interested in will get you interesting links and let you feel
+    confident enough that you're not missing out on anything. If it turns out you were, it'll quickly become popular and
+    you'll see it then.

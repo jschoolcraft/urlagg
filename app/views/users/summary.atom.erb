@@ -1,0 +1,19 @@
+<%=
+Atom::Feed.new do |f|
+  f.title = "[urlagg] Daily summary for #{@user.login}"
+  f.links << Atom::Link.new(:href => summary_user_url(:id => @user.id, :format => 'atom')) 
+  f.updated = @latest_update
+  f.id = "urlagg.com:user_links:#{h(@user.login)}:summary"
+
+  f.entries << Atom::Entry.new do |e|
+    e.id = "urlagg.com:user_links:#{h(@user.login)}:summary:#{Date.today}"
+    e.title = "[urlagg] #{Date.today} - Links for #{@user.login}"
+    e.updated = @latest_update
+    content = []
+    @tags_with_links.each do |tag, links|
+      content << render(:partial => 'tag.atom.erb', :locals => {:tag => tag, :links => links})
+    end
+    e.content = Atom::Content::Html.new(content.join)
+  end
+end.to_xml
+%>

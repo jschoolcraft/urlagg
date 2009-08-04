@@ -1,0 +1,18 @@
+<%=
+Atom::Feed.new do |f|
+  f.title = "[urlagg] Popular links for tags tracked by #{@user.login}"
+  f.links << Atom::Link.new(:href => user_url(:id => @user.id, :format => 'atom')) 
+  f.links << Atom::Link.new(:rel => "alternate", :href => user_url(:id => @user.id, :format => 'html'))
+  f.updated = @links && @links.first && @links.first.created_at
+  f.id = "urlagg.com:user_links:#{h(@user.login)}"
+  @links.each do |link|
+    f.entries << Atom::Entry.new do |e|
+      e.id = "urlagg.com:user_links:#{h(@user.login)}:#{Digest::SHA1.hexdigest(link.url)}"
+      e.title = link.title
+      e.links << Atom::Link.new(:href => link.url)
+      e.updated = link.updated_at
+      e.content = Atom::Content::Html.new(render(:partial => "link.atom.erb", :object => link))
+    end
+  end
+end.to_xml
+%>

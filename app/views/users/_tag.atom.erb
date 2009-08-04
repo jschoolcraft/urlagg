@@ -1,0 +1,6 @@
+<div class="tag">
+  <h3><%=h tag.name %></h3>
+  <ul>
+    <%= render :partial => 'tags/link.atom.erb', :collection => links, :locals => { :tag => tag } %>
+  </ul>
+</div>

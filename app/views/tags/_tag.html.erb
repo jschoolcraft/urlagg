@@ -1,0 +1,7 @@
+<div class="tag">
+  <h3><%= link_to h(tag.name), tag_path(tag) %></h3>
+  <%= link_to('mark read', read_tag_path(tag), :id => dom_id(tag, 'mark_read'), :method => :post) %>
+  <ul>
+    <%= render :partial => 'link', :collection => links, :locals => { :tag => tag } %>
+  </ul>
+</div>

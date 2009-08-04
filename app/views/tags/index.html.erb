@@ -1,0 +1,30 @@
+<%- title 'Currently Tracking', false -%>
+<div class="grid_8">
+  <h1>Currently Tracking</h1>
+    <%= link_to 'Mark all read', user_path(current_user), :method => :put, :params => { :last_viewed_tags_index_at => Time.now } %>
+</div>
+<div class="action grid_4 r">
+  <% form_for @tag, :url => taggings_path do |f| -%>
+    <%= f.label :name, "Add tag" %>
+    <%= f.text_field :name, :size => 15 %>
+    <%= f.submit "Track" %>
+  <% end -%>
+</div>
+
+<div class="clear"></div>
+
+<div id="recent_links" class="grid_9">
+  <%= render_links_for_tags(@taggings) %>
+</div>
+
+<div id="sidebar" class="grid_3">
+  <%= render :partial => 'sidebar' %>
+</div>
+
+<div class="clear"></div>
+
+<div class="grid_12">
+  <%= image_tag 'feed-icon.png' %> Subscribe to <%= link_to "Atom feed", user_url(@user, :format => "atom") %>
+  or <%= link_to "Daily summary feed", summary_user_url(@user, :format => "atom") %>
+</div>
+<div class="clear">&nbsp;</div>

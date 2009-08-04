@@ -1,0 +1,23 @@
+<%- title 'Please login', true -%>
+
+<div class="clear">&nbsp;</div>
+
+<% form_for @user_session, :url => user_session_path do |f| %>
+<div class="container_12">
+  <div class="grid_4">
+    <%= f.label :login %><br />
+    <%= f.text_field :login %><br />
+    <br />
+    <%= f.label :password %><br />
+    <%= f.password_field :password %><br />
+    <br />
+    <%= link_to 'Forgot password?', new_password_reset_path %>
+    <%= f.submit "Login" %>
+  </div>
+  <div class="grid_7">
+    <%= f.error_messages %>
+  </div>
+  
+  <div class="clear">&nbsp;</div>
+</div>
+<% end %>

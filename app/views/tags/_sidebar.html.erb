@@ -1,0 +1,27 @@
+<div class="section">
+  <h3 title="Magic Tags are tags within URLAgg that have special meaning and don't map to popular/tag">Magic Tags</h3>
+  <ul>
+    <li><%= link_to "hot", tags_path(:tag => "hot"), :title => "These are links found on http://delicious.com" %></li>
+    <li><%= link_to "popular", tags_path(:tag => "popular"), :title => "These are links found on http://delicious.com/popular proper" %></li>
+  </ul>
+</div>
+
+<%- if @tags -%>
+<div class="section">
+  <h3>All tracked tags</h3>
+  <ul>
+  <% @tags.ascending.each do |tag| %>
+    <li><%= link_to h(tag), tag_path(tag) %></li>
+  <% end -%>
+  </ul>
+</div>
+<%- end -%>
+
+<div class="section">
+  <h3>URLAgger trackings</h3>
+  <ul>
+  <% @recent_taggings.each do |tag| %>
+    <li><%= link_to h(tag), tag_path(tag) %></li>
+  <% end -%>
+  </ul>
+</div>

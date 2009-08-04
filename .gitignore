@@ -1,0 +1,16 @@
+.DS_Store
+log/*.log
+tmp/**/*
+db/*.sqlite3
+coverage/*
+coverage.data
+*~
+public/stylesheets/application.css
+public/stylesheets/text.css
+public/stylesheets/tools.css
+public/stylesheets/pagination.css
+tmp/*
+tmp/**/*
+*.tmproj
+public/sitemaps/*
+

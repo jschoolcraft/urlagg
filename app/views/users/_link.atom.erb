@@ -1,0 +1,6 @@
+<div class="title"><%= h link.title %></div>
+<div class="url"><%= link_to link.url, link.url %></div>
+<div class="tags">Tags: 
+<%- link.tags.each do |tag| -%>
+  <%= link_to h(tag.name), tag_url(tag) %>
+<%- end -%></div>

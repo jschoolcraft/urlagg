@@ -1,0 +1,11 @@
+<li>
+  <%= link_to h(link.title), link.url, :title => h(link.url) %> [<%= extract_host(link.url) %>]
+  <%- tags = link.tags.reject { |t|
+    t.name == tag.name
+  } -%>
+  <%- if tags.size > 0 -%>
+    <div class="related">
+      Also seen in: <%= tags.map { |t| link_to h(t.name), tag_url(t) }.join(', ') -%>
+    </div>
+  <%- end -%>
+</li>

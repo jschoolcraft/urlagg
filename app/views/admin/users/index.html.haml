@@ -1,0 +1,23 @@
+- title 'Users'
+
+.clear
+
+%table.admin
+  - if !@users.blank?
+    %thead
+      %tr
+        %th Login
+        %th Tags
+        %th Joined On
+    %tfoot
+      %tr
+        %td{ :colspan => 3 }
+          = will_paginate @users
+    - for user in @users
+      %tr
+        %td=h user.login
+        %td=  user.tags.size
+        %td=  user.created_at.to_s(:short)
+  - else
+    %tr
+      %td No users

@@ -1,0 +1,255 @@
+@import tools.sass
+@import text.sass
+@import pagination.sass
+
+!body_bg= #A5D0EB
+!content_padding= 13px
+
+!tag_link=          #105CB6
+!tag_link_visited = #86B0E1
+!tag_link_hover=    #000033
+
+!orange= #FFC33E
+
+html, body
+  :height 100%
+  
+#not_ft
+  :position relative
+  :min-height 100%
+  :background transparent url(../images/w980.gif) repeat-y center 0
+  :background-color= !body_bg
+  
+*
+  html
+    #not_ft
+      :height 100%
+
+#content
+  :padding-bottom 60px
+
+#ft
+  :position relative
+  :margin-top -60px
+
+body, html
+  :background-color= !body_bg
+
+#bd
+  :padding
+    :top= !content_padding
+    :bottom= !content_padding
+
+.bg_space
+  :height= !content_padding
+  :background-color= !body_bg
+
+#hd
+  .wrapper
+    :height 1%
+    :background-color= !orange
+    :border-bottom 1px solid #aaa
+    :padding
+      :top 10px
+      :bottom 10px
+  
+  a, a:visited
+    :color= !tag_link
+  
+  p
+    :margin-bottom 5px
+  
+  h1
+    :margin 0.5em 0 0 0
+    :display inline
+    
+    a
+      :color #000
+      :text-decoration none
+      
+      &:visited
+        :color #000
+    
+      span
+        :color #fefefe
+
+#ft
+  :height 50px
+  :color #fefefe
+  
+  .wrapper
+    :background-color #333
+    :padding 1em 0
+    :border-top 1px solid #fefefe
+
+  p
+    :margin 0
+    
+    a, a:visited
+      :color #fefefe
+#bd
+  h1
+    :font-size 20px
+    :margin-left 0
+    :color #333
+
+.tags#index, .tags#top
+  .tag
+    h3
+      :margin-bottom 0
+      
+      a, a:visited
+        :color= !tag_link
+        :text-decoration none
+  
+    li
+      :margin-left 0
+      :padding
+        :top 4px
+        :bottom 3px
+      :border-top 1px solid silver
+      :line-height 1.22em
+      :list-style none
+      
+      a
+        :color= !tag_link
+        :text-decoration none
+  
+        &:hover
+          :color= !tag_link_hover
+          :text-decoration underline
+    
+        &:visited
+          :color= !tag_link_visited
+
+a
+  :color= !tag_link
+  :text-decoration none
+
+  &:hover
+    :color= !tag_link_hover
+    :text-decoration underline
+
+  &:visited
+    :color= !tag_link
+
+a.action, a.important
+  :text-decoration none
+
+a.action:hover, a.important:hover
+  :text-decoration underline
+  
+a.action, a.action:visited
+  :color #333
+
+a.important:hover
+  :color red
+
+ul.links
+  li
+    :line-height 1.22em
+    :padding
+      :top 3px
+      :bottom 2px
+    :list-style disc
+    
+    a
+      :color= !tag_link
+      :text-decoration none
+      :font-size 1.1em
+      &:visited
+        :color= !tag_link_visited
+      
+      &:hover
+        :color= !tag_link_hover
+        :text-decoration underline
+
+.source_tags
+  :margin-left 20px
+  :font-size 0.8em
+  
+  .label
+    :width 10%
+    :float left
+    :text-align right
+    :margin-right 1%
+    
+  .tags
+    :width 88%
+    :float left
+
+.even
+  :background-color #efefef
+    
+h2.nice
+  :font-size 28px
+  :line-height 1em
+  :letter-spacing -1px
+
+#flash_notice
+  :padding 5px 8px
+  :margin 10px 0
+  :background-color #CFC
+  :border solid 1px #6C6
+
+
+#flash_error
+  :padding 5px 8px
+  :margin 10px 0
+  :background-color #FCC
+  :border solid 1px #C66
+
+
+.fieldWithErrors
+  :display inline
+
+
+#errorExplanation
+  :width 400px
+  :border 2px solid #CF0000
+  :padding 0px
+  :padding-bottom 12px
+  :margin-bottom 20px
+  :background-color #f0f0f0
+
+  h2
+    :text-align left
+    :font-weight bold
+    :padding 5px 5px 5px 15px
+    :font-size 12px
+    :margin 0
+    :background-color #c00
+    :color #fff
+
+  p
+    :color #333
+    :margin-bottom 0
+    :padding 8px
+
+  ul
+    :margin 2px 24px
+
+    li
+      :font-size 12px
+      :list-style disc
+
+table.admin
+  :width 85%
+  :background #fff
+  :margin 45px
+  :border-collapse collapse
+  :text-align left
+  
+  th
+    :font-size  14
+    :color  #039
+    :padding  10px 8px
+    :border-bottom 2px solid #6678b1
+  
+  td
+    :border-bottom 1px solid #ccc
+    :color #669
+    :padding 6px 8px
+
+  tbody,tr:hover,td
+    :color #009

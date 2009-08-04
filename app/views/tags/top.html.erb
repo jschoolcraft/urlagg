@@ -1,0 +1,22 @@
+<%- title 'Top 9 most tracked tags on URLAgg', false -%>
+
+<div class="grid_8">
+  <h1>Top 9 most tracked tags on URLAgg</h1>
+</div>
+
+<div class="clear">&nbsp;</div>
+
+<%- @tags.each_with_index do |tag, index| -%>
+<div class="grid_4 tag">
+  <h3><%= link_to h(tag.name), tag %></h3>
+  <ul>
+    <%= render :partial => "link", :collection => tag.links.latest, :locals => { :tag => tag, :hide_source_tags => true } %>
+  </ul>
+</div>
+
+<%- if (index + 1) % 3 == 0 -%>
+<div class="clear">&nbsp;</div>
+<%- end -%>
+
+<%- end-%>
+<div class="clear">&nbsp;</div>

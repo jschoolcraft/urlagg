@@ -1,0 +1,6 @@
+<div class="tag">
+  <h3>Popular links seen on <%= Date.today %> for <%=h tag.name %></h3>
+  <ul>
+    <%= render :partial => 'link.atom.erb', :collection => tag.todays_links, :locals => { :tag => tag} %>
+  </ul>
+</div>

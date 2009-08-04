@@ -1,0 +1,19 @@
+<li class="<%= cycle('even', 'odd') %>">
+  <%= link_to h(link.title), link.url %>
+  [<%= extract_host(link.url) %>]
+  
+  <%- tags = link.source_tags.reject { |t|
+    t == tag.name
+  }
+    hide_source_tags ||= false
+  -%>
+  
+  <%- unless hide_source_tags
+        if tags.size > 0 -%>
+        <div class="source_tags">
+          <div class="label">source tags:</div> <div class="tags"><%= tags.map { |t| "<a href=\"/tags/#{h(t)}\">#{h(t)}</a>" }.join(', ') -%></div>
+        </div>
+        <div class="clear"></div>
+      <%- end -%>
+    <%- end -%>
+</li> 

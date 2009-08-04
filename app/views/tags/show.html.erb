@@ -1,0 +1,34 @@
+<%- title "Popular links for #{h(@tag.name)}" -%>
+<%- content_for :head do -%>
+<link rel="alternate" href="<%= tag_url(@tag, :format => 'atom') %>" type="application/atom+xml" title="Popular links for <%= @tag.name %>">
+<link rel="alternate" href="<%= summary_tag_url(@tag, :format => 'atom') %>" type="application/atom+xml" title="Daily links for <%= @tag.name %>">
+<%- end -%>
+<div class="grid_6 r">
+  <%= link_to '&laquo; Back to tags', tags_path, :class => 'action' %> | 
+  <%- if current_user
+    if current_user.tags.include?(@tag) -%>
+      <%= link_to "Stop tracking <strong>#{h(@tag)}</strong>", tagging_path(@tag), :confirm => 'Are you sure?', :method => :delete, :class => 'action important' %>
+    <%- else -%>
+      <%= link_to "Start tracking <strong>#{h(@tag)}</strong>", taggings_path(:tag => {:name => @tag.name}), :method => :post, :class => 'action important' %>
+    <%- end -%>
+  <%- end -%>
+</div>
+<div class="clear"></div>
+<div class="grid_9">
+  <ul class="links">
+    <%= render :partial => 'link', :collection => @links, :locals => { :tag => @tag } %>
+  </ul>
+</div>
+<div id="sidebar" class="grid_3">
+  <%= render :partial => 'sidebar' %>
+</div>
+<div class="clear"></div>
+<div class="grid_12">
+  <%= will_paginate @links, :class => 'pagination digg_pagination' %>
+</div>
+<div class="clear"></div>
+<div class="grid_12">
+  <%= image_tag 'feed-icon.png' %> Subscribe to <%= link_to "Atom feed", tag_url(@tag, :format => "atom") %>
+  or <%= link_to "Daily summary feed", summary_tag_url(@tag, :format => "atom") %>
+</div>
+<div class="clear"></div>
