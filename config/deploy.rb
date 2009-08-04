@@ -2,6 +2,7 @@ set :application, "urlagg"
 set :repository, "git@github.com:jschoolcraft/urlagg.git"
 set :user, "jeff"
 set :use_sudo, true
+set :git_enable_submodules, false
 set :deploy_via, :fast_remote_cache
  
 set :keep_releases, 6
