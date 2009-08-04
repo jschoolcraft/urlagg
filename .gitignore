@@ -2,6 +2,7 @@
 log/*.log
 tmp/**/*
 db/*.sqlite3
+config/database.yml
 coverage/*
 coverage.data
 *~
@@ -13,4 +14,6 @@ tmp/*
 tmp/**/*
 *.tmproj
 public/sitemaps/*
+config/initializers/hoptoad.rb
+config/newrelic.yml
 
