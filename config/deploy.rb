@@ -13,7 +13,7 @@ namespace :deploy do
   task :link_config, :roles => :app do
     unless config_files.empty?
       config_files.each do |file|
-        run "ln -nsf #{File.join(shared_path, file)} #{File.join(current_path, "/config/#{file}")}"
+        run "ln -nsf #{File.join(shared_path, file)} #{File.join(release_path, "/config/#{file}")}"
       end
     end
   end
