@@ -1,0 +1,8 @@
+--- 
+format: 1
+handler: 
+  commit: 18a42374ce9c2dd595cb6dbbe357d46af797e011
+  branch: master
+lock: false
+repository_class: Piston::Git::Repository
+repository_url: git://github.com/rubaidh/rubaidhstrano.git

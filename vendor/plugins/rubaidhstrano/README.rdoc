@@ -1,0 +1,198 @@
+= Rubaidhstrano
+
+We have a bunch of deployment-related ... stuff kicking around and I'm fed up
+copying it from one project to the next. Particularly when I change/improve
+the recipes as I go and those changes don't get to filter back to previous
+projects automatically. This plugin (or hopefully, one day, gem!) attempts to
+rectify that by collecting all these recipes and support tasks together.
+
+== Contents
+
+There's a real mish-mash of stuff in here, so let's take it one at a time.
+
+=== Defaults
+
+We've supplied a bunch of sensible defaults to required options:
+
+* We use Git, GitHub, make heavy use of submodules and (almost) always name
+  our repository after the application name. That means we can guess a number
+  of things, which is nice.
+
+* We use Passenger for deployment, nobody needs to do any sudoing and, by
+  default everything runs on a single host.
+
+* Check for all the possible (default) ssh keys, and forward our ssh-agent to
+  the remote machine. This means you can clone the repository from GitHub
+  using your own SSH key instead of a shared deployment one.
+
+Of course, these defaults are supplied in such a way that they can easily be
+overridden if they don't suit a particular application; just replace their
+values.
+
+=== Database backup and restore
+
+There is a mixture of Capistrano and Rake tasks to allow the database on the
+deployment environment to be backed up, downloaded and restored into another
+environment.
+
+There are a few useful use cases for these tasks.
+
+==== Backing up the database before a migration
+
+In order to automatically back up the production database before a migration,
+insert the following into your capistrano recipe:
+
+    set :backup_database_before_migrations, true
+
+This is done in the defaults anyway, so should be enabled by default, so if
+you want to disable it, you can do:
+
+    set :backup_database_before_migrations, false
+
+==== Duplicating the production database to your local environment.
+
+You've got a problem in production that you suspect is down to data rather
+than anything else and you'd like to dump the production database to your
+local development environment for further testing. This can be achieved with:
+
+    cap production db:download
+    rake db:backup:load
+
+Note: this example assumes that you're using multistage deployments for
+staging and production. Please also be aware that this will nuke your current
+development environment's database!
+
+=== Passenger deployment strategy
+
+We've been through a few deployment strategies over the years -- using
+mongrels managed by Runit or Solaris SMF. Now we're just using Passenger
+inside Apache and life is much easier. :-) If you've also seen the light then
+you can switch Capistrano to use the Passenger deployment strategy with one
+line:
+
+    set :deployment_strategy, :passenger
+
+Of course, the defaults already set this, so you probably don't need to worry
+about it. :-)
+
+=== Multistage deployments
+
+The code for the multistage deployment has largely been borrowed from the
+capistrano-ext gem by Jamis Buck. It's been modified here so that it doesn't
+bother anyone unless you want a multistage deployment. If you do want a
+multistage deployment, create files named after each of the stages in
++config/deploy+ (for example, create +config/deploy/staging.rb+ and
++config/deploy/production.rb+ to have a staging and production deployment).
+Those files should configure things that are special to that particular
+deployment, while +config/deploy.rb+ will still configure the generic setup.
+Anything in one of the staging files will override a setting in the generic
+setup.
+
+Once you've configured multistage deployments, you'll have to prefix every
+deployment command with the name of the environment you want to deploy to. For
+example, to deploy to the production cluster:
+
+    cap production deploy
+
+or to the staging environment:
+
+    cap staging deploy
+
+By default, if you set up staging, we assume that you want to deploy from a
+branch named after the stage, and with a rails_env named after the stage. So,
+for example, when you do:
+
+    cap staging deploy
+
+we assume that you want to deploy from the 'staging' branch and that the
+running rails environment will be 'staging' too. You can, of course, change
+this. :)
+
+=== New Relic RPM Support
+
+Automatically run New Relic's post-deployment task if it's there. Don't bother
+if it's not.
+
+=== Shared assets
+
+Some of our applications have assets that need to be shared across
+deployments. The most common example is if you've been using attachment_fu (or
+some other upload plugin which stores files locally in the filesystem) and you
+want to maintain those uploads between deployments.
+
+In order to share assets between deployments, list the directories needing
+shared as so:
+
+    set :asset_directories, ['public/paintings', 'public/pdfs']
+
+Each directory is relative to +RAILS_ROOT+.
+
+==== Duplicating production assets to your local environment
+
+If you want to, and have the bandwidth, you can duplicate the production
+shared assets to your local environment.  You can achieve that with:
+
+    cap production assets:download
+    rake assets:backup:load
+
+=== Replication
+
+If you combine the two duplication tasks, you get a complete mechanism to
+replicate a deployment environment back to your local system. So the
+combination exists. To duplicate your production environment to your
+development environment, run the following:
+
+    cap production replicate
+
+A few things to be aware of, though:
+
+* This will nuke the data from your development environment, including the
+  database and anything stored in asset directories. Don't say I didn't warn
+  you!
+
+* It doesn't scale. If the data in your production database, along with its
+  assets is large, it ain't going to work well. I'm currently getting mildly
+  irritated with it on an application with a combined set of assets which is
+  only 50MB.
+
+* There may be security or data protection issues with duplicating your
+  production environment to your laptop. Please make sure that you are
+  complying with data protection laws and the stringent security practices of
+  your company.
+
+=== Gems
+
+Rails provides the ability to vendor all your gems. Some gems are C
+extensions. If you have chosen to vendor all your C extension-based gems then
+you'll need to build them each time you deploy. If that's the case, you can:
+
+    set :build_gems, true
+
+and they will automatically be built. In fact, we like this option, so it's
+switched on by default. If you wish to disable it in a particular deployment,
+add the following to your +config/deploy.rb+:
+
+    set :build_gems, false
+
+=== Release tagging
+
+Every time a release happens, a tag will be created in your local git
+repository with the release name (which, by default, is of the format
+yyyymmddhhmmss, eg 20090522054102) and pushes that tag out (nothing else,
+though, I hope!).  If you want to disable this behaviour, do:
+
+    set :tag_on_deploy, false
+
+and it'll quit noising up your GitHub feed.
+
+== Thanks
+
+Some of the code has been borrowed from other sources. The multistage
+deployment code was borrowed from the capistrano-ext gem by Jamis Buck.
+Thanks, Jamis! (Oh, and PS, thanks for Capistrano, too!)
+
+Craig Webster's simple_deployment provided inspiration for the asset backup,
+and I'm pretty sure Craig fixed a number of issues in this plugin's previous
+incarnation, +rubaidh_platform+. Thanks, Craig!
+
+Copyright (c) 2009 Rubaidh Ltd, released under the MIT license
