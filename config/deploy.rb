@@ -1,5 +1,5 @@
 set :application, "urlagg"
-set :repository, "git@github.com:jschoolcraft/URLAgg.git"
+set :repository, "git@github.com:jschoolcraft/urlagg.git"
 set :user, "jeff"
 set :use_sudo, true
 set :deploy_via, :fast_remote_cache
