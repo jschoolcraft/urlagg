@@ -1,5 +1,5 @@
 set :application, "urlagg"
-set :repository, "git://github.com/jschoolcraft/urlagg.git"
+set :repository, "git@github.com:jschoolcraft/URLAgg.git"
 set :user, "jeff"
 set :use_sudo, true
 set :deploy_via, :fast_remote_cache
@@ -12,7 +12,9 @@ desc "Move shared files over to release directory"
 namespace :deploy do
   desc "Re-link config files"
   task :link_config, :roles => :app do
-    run "ln -nsf #{shared_path}/config/database.yml #{current_path}/config/database.yml"
+    %w(database.yml newrelic.yml initializers/hoptoad.rb).each do |file|
+      run "ln -nsf #{shared_path}/config/#{file} #{current_path}/config/#{file}"
+    end
   end
 end
 
