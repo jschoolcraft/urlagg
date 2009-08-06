@@ -4,7 +4,8 @@ set :user, "jeff"
 set :use_sudo, true
 set :git_enable_submodules, false
 set :deploy_via, :fast_remote_cache
- 
+set :branch, "master"
+
 set :keep_releases, 6
 
 set :config_files, %w(database.yml newrelic.yml initializers/hoptoad.rb)
