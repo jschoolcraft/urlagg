@@ -15,6 +15,7 @@
 
 <div id="recent_links" class="grid_9">
   <%= render_links_for_tags(@taggings) %>
+  <%= link_to 'Mark all read', user_path(current_user), :method => :put, :params => { :last_viewed_tags_index_at => Time.now } %>
 </div>
 
 <div id="sidebar" class="grid_3">
