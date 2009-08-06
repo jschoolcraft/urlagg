@@ -1,5 +1,6 @@
 set :host, "urlagg.com"
 set :deploy_to, "/var/www/apps/#{application}"
+set :branch, "master"
 
 # only have god running in production
 set :god_task, 'link_updater'
