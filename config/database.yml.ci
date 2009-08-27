@@ -3,5 +3,8 @@ test: &TEST
   database: db/test.sqlite3
   timeout: 5000
   
+development: 
+  <<: *TEST
+  
 cucumber:
   <<: *TEST
