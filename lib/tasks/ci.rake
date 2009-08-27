@@ -4,6 +4,6 @@ namespace :ci do
   end
   
   desc "Prepare for CI and run"
-  task :build => ['gems:build', 'ci:copy_yml', 'db:create:all', 'db:migrate', 'spec', 'features'] do
+  task :build => ['gems:build:force', 'ci:copy_yml', 'db:create:all', 'db:migrate', 'spec', 'features'] do
   end
 end
