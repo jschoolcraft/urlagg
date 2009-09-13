@@ -1,3 +1,4 @@
+@wip
 Feature: A valid user should be able to authenticate with the site
 
   As a valid user

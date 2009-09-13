@@ -27,7 +27,7 @@ describe "/users/summary.atom.erb" do
   end
   
   def do_render
-    render "/users/summary.atom.erb"
+    render "/users/summary.atom.erb", :helper => :tags
     @feed = Atom::Feed.load_feed(response.body)
   end
 
