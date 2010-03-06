@@ -34,11 +34,13 @@ module ActiveRecord
     end
   end
 
-  class HasManyThroughCantAssociateThroughHasManyReflection < ActiveRecordError #:nodoc:
+  class HasManyThroughCantAssociateThroughHasOneOrManyReflection < ActiveRecordError #:nodoc:
     def initialize(owner, reflection)
       super("Cannot modify association '#{owner.class.name}##{reflection.name}' because the source reflection class '#{reflection.source_reflection.class_name}' is associated to '#{reflection.through_reflection.class_name}' via :#{reflection.source_reflection.macro}.")
     end
   end
+  HasManyThroughCantAssociateThroughHasManyReflection = ActiveSupport::Deprecation::DeprecatedConstantProxy.new('ActiveRecord::HasManyThroughCantAssociateThroughHasManyReflection', 'ActiveRecord::HasManyThroughCantAssociateThroughHasOneOrManyReflection')
+
   class HasManyThroughCantAssociateNewRecords < ActiveRecordError #:nodoc:
     def initialize(owner, reflection)
       super("Cannot associate new records through '#{owner.class.name}##{reflection.name}' on '#{reflection.source_reflection.class_name rescue nil}##{reflection.source_reflection.name rescue nil}'. Both records must have an id in order to create the has_many :through record associating them.")
@@ -273,9 +275,10 @@ module ActiveRecord
     # You can manipulate objects and associations before they are saved to the database, but there is some special behavior you should be
     # aware of, mostly involving the saving of associated objects.
     #
-    # Unless you enable the :autosave option on a <tt>has_one</tt>, <tt>belongs_to</tt>,
-    # <tt>has_many</tt>, or <tt>has_and_belongs_to_many</tt> association,
-    # in which case the members are always saved.
+    # Unless you set the :autosave option on a <tt>has_one</tt>, <tt>belongs_to</tt>,
+    # <tt>has_many</tt>, or <tt>has_and_belongs_to_many</tt> association. Setting it
+    # to +true+ will _always_ save the members, whereas setting it to +false+ will
+    # _never_ save the members.
     #
     # === One-to-one associations
     #
@@ -409,6 +412,32 @@ module ActiveRecord
     #   @firm = Firm.find :first
     #   @firm.clients.collect { |c| c.invoices }.flatten # select all invoices for all clients of the firm
     #   @firm.invoices                                   # selects all invoices by going through the Client join model.
+    #
+    # Similarly you can go through a +has_one+ association on the join model:
+    #
+    #   class Group < ActiveRecord::Base
+    #     has_many   :users
+    #     has_many   :avatars, :through => :users
+    #   end
+    #
+    #   class User < ActiveRecord::Base
+    #     belongs_to :group
+    #     has_one    :avatar
+    #   end
+    #
+    #   class Avatar < ActiveRecord::Base
+    #     belongs_to :user
+    #   end
+    #
+    #   @group = Group.first
+    #   @group.users.collect { |u| u.avatar }.flatten # select all avatars for all users in the group
+    #   @group.avatars                                # selects all avatars by going through the User join model.
+    #
+    # An important caveat with going through +has_one+ or +has_many+ associations on the join model is that these associations are 
+    # *read-only*.  For example, the following would not work following the previous example:
+    #
+    #   @group.avatars << Avatar.new                # this would work if User belonged_to Avatar rather than the other way around.
+    #   @group.avatars.delete(@group.avatars.last)  # so would this
     #
     # === Polymorphic Associations
     #
@@ -759,7 +788,7 @@ module ActiveRecord
       # [:through]
       #   Specifies a Join Model through which to perform the query.  Options for <tt>:class_name</tt> and <tt>:foreign_key</tt>
       #   are ignored, as the association uses the source reflection. You can only use a <tt>:through</tt> query through a <tt>belongs_to</tt>
-      #   or <tt>has_many</tt> association on the join model.
+      #   <tt>has_one</tt> or <tt>has_many</tt> association on the join model.
       # [:source]
       #   Specifies the source association name used by <tt>has_many :through</tt> queries.  Only use it if the name cannot be
       #   inferred from the association.  <tt>has_many :subscribers, :through => :subscriptions</tt> will look for either <tt>:subscribers</tt> or
@@ -846,7 +875,9 @@ module ActiveRecord
       #   if the real class name is Person, you'll have to specify it with this option.
       # [:conditions]
       #   Specify the conditions that the associated object must meet in order to be included as a +WHERE+
-      #   SQL fragment, such as <tt>rank = 5</tt>.
+      #   SQL fragment, such as <tt>rank = 5</tt>. Record creation from the association is scoped if a hash
+      #   is used. <tt>has_one :account, :conditions => {:enabled => true}</tt> will create an enabled account with <tt>@company.create_account</tt>
+      #   or <tt>@company.build_account</tt>.
       # [:order]
       #   Specify the order in which the associated objects are returned as an <tt>ORDER BY</tt> SQL fragment,
       #   such as <tt>last_name, first_name DESC</tt>.
@@ -1241,7 +1272,11 @@ module ActiveRecord
 
             if association_proxy_class == HasOneThroughAssociation
               association.create_through_record(new_value)
-              self.send(reflection.name, new_value)
+              if new_record?
+                association_instance_set(reflection.name, new_value.nil? ? nil : association)
+              else
+                self.send(reflection.name, new_value)
+              end
             else
               association.replace(new_value)
               association_instance_set(reflection.name, new_value.nil? ? nil : association)
@@ -1292,8 +1327,8 @@ module ActiveRecord
             end
 
             define_method("#{reflection.name.to_s.singularize}_ids=") do |new_value|
-              ids = (new_value || []).reject { |nid| nid.blank? }
-              send("#{reflection.name}=", reflection.class_name.constantize.find(ids))
+              ids = (new_value || []).reject { |nid| nid.blank? }.map(&:to_i)
+              send("#{reflection.name}=", reflection.klass.find(ids).index_by(&:id).values_at(*ids))
             end
           end
         end
@@ -1376,7 +1411,7 @@ module ActiveRecord
           if reflection.options.include?(:dependent)
             # Add polymorphic type if the :as option is present
             dependent_conditions = []
-            dependent_conditions << "#{reflection.primary_key_name} = \#{record.quoted_id}"
+            dependent_conditions << "#{reflection.primary_key_name} = \#{record.#{reflection.name}.send(:owner_quoted_id)}"
             dependent_conditions << "#{reflection.options[:as]}_type = '#{base_class.name}'" if reflection.options[:as]
             dependent_conditions << sanitize_sql(reflection.options[:conditions], reflection.quoted_table_name) if reflection.options[:conditions]
             dependent_conditions << extra_conditions if extra_conditions
@@ -1838,7 +1873,7 @@ module ActiveRecord
                     descendant
                   end.flatten.compact
 
-                  remove_duplicate_results!(reflection.class_name.constantize, parent_records, associations[name]) unless parent_records.empty?
+                  remove_duplicate_results!(reflection.klass, parent_records, associations[name]) unless parent_records.empty?
                 end
             end
           end

@@ -2,13 +2,9 @@ require 'active_support/core_ext/string/starts_ends_with'
 
 module ActiveSupport
   module JSON
-    unless const_defined?(:ParseError)
-      class ParseError < StandardError
-      end
-    end
-
     module Backends
       module Yaml
+        ParseError = ::StandardError
         extend self
 
         # Converts a JSON string into a Ruby object.
@@ -17,7 +13,7 @@ module ActiveSupport
         rescue ArgumentError => e
           raise ParseError, "Invalid JSON string"
         end
-    
+
         protected
           # Ensure that ":" and "," are always followed by a space
           def convert_json_to_yaml(json) #:nodoc:
@@ -41,6 +37,8 @@ module ActiveSupport
                 end
               when ":",","
                 marks << scanner.pos - 1 unless quoting
+              when "\\"
+                scanner.skip(/\\/)
               end
             end
 
@@ -83,3 +81,4 @@ module ActiveSupport
     end
   end
 end
+

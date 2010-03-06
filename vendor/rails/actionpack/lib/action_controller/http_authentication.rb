@@ -139,7 +139,7 @@ module ActionController
       end
 
       def decode_credentials(request)
-        ActiveSupport::Base64.decode64(authorization(request).split.last || '')
+        ActiveSupport::Base64.decode64(authorization(request).split(' ', 2).last || '')
       end
 
       def encode_credentials(user_name, password)
@@ -195,9 +195,10 @@ module ActionController
           return false unless password
 
           method = request.env['rack.methodoverride.original_method'] || request.env['REQUEST_METHOD']
+          uri    = credentials[:uri][0,1] == '/' ? request.request_uri : request.url
 
          [true, false].any? do |password_is_ha1|
-           expected = expected_response(method, request.env['REQUEST_URI'], credentials, password, password_is_ha1)
+           expected = expected_response(method, uri, credentials, password, password_is_ha1)
            expected == credentials[:response]
          end
         end
@@ -226,9 +227,9 @@ module ActionController
       end
 
       def decode_credentials(header)
-        header.to_s.gsub(/^Digest\s+/,'').split(',').inject({}) do |hash, pair|
+        header.to_s.gsub(/^Digest\s+/,'').split(',').inject({}.with_indifferent_access) do |hash, pair|
           key, value = pair.split('=', 2)
-          hash[key.strip.to_sym] = value.to_s.gsub(/^"|"$/,'').gsub(/'/, '')
+          hash[key.strip] = value.to_s.gsub(/^"|"$/,'').gsub(/'/, '')
           hash
         end
       end
@@ -288,6 +289,7 @@ module ActionController
       # allow a user to use new nonce without prompting user again for their
       # username and password.
       def validate_nonce(request, value, seconds_to_timeout=5*60)
+        return false if value.nil?
         t = Base64.decode64(value).split(":").first.to_i
         nonce(t) == value && (t - Time.now.to_i).abs <= seconds_to_timeout
       end
