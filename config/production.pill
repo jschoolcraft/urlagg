@@ -1,3 +1,5 @@
+RAILS_ROOT = File.dirname(File.dirname(__FILE__))
+
 Bluepill.application("urlagg") do |app|
   app.process("link_updater") do |process|
     process.working_dir = "/var/www/apps/urlagg/current"
@@ -6,12 +8,12 @@ Bluepill.application("urlagg") do |app|
     process.stop_grace_time     = 10.seconds
     process.restart_grace_time  = 10.seconds
  
-    script = File.join(Rails.root, "/lib/daemons/link_updater_ctl")
+    script = File.join(RAILS_ROOT, "/lib/daemons/link_updater_ctl")
     process.start_command = "#{script} start"
     process.stop_command  = "#{script} stop"
     process.restart_command = "#{script} restart"
  
-    process.pid_file = File.join(Rails.root, "/log/link_updater.rb.pid")
+    process.pid_file = File.join(RAILS_ROOT, "/log/link_updater.rb.pid")
     process.uid = "urlagg"
     process.gid = "urlagg"
     
