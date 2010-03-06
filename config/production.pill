@@ -6,12 +6,12 @@ Bluepill.application("urlagg") do |app|
     process.stop_grace_time     = 10.seconds
     process.restart_grace_time  = 10.seconds
  
-    script = "#{RAILS_ROOT}/lib/daemons/link_updater_ctl"
+    script = File.join(RAILS.root, "/lib/daemons/link_updater_ctl")
     process.start_command = "#{script} start"
     process.stop_command  = "#{script} stop"
     process.restart_command = "#{script} restart"
  
-    process.pid_file = "#{RAILS_ROOT}/log/link_updater.rb.pid"
+    process.pid_file = File.join(Rails.root, "/log/link_updater.rb.pid")
     process.uid = "urlagg"
     process.gid = "urlagg"
     
