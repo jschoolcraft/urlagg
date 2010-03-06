@@ -1,0 +1,21 @@
+Bluepill.application("urlagg") do |app|
+  app.process("link_updater") do |process|
+    process.working_dir = "/var/www/apps/urlagg/current"
+
+    process.start_grace_time    = 10.seconds
+    process.stop_grace_time     = 10.seconds
+    process.restart_grace_time  = 10.seconds
+ 
+    script = "#{RAILS_ROOT}/lib/daemons/link_updater_ctl"
+    process.start_command = "#{script} start"
+    process.stop_command  = "#{script} stop"
+    process.restart_command = "#{script} restart"
+ 
+    process.pid_file = "#{RAILS_ROOT}/log/link_updater.rb.pid"
+    process.uid = "urlagg"
+    process.gid = "urlagg"
+    
+    process.checks :cpu_usage, :every => 10.seconds, :below => 5, :times => 3        
+    process.checks :mem_usage, :every => 10.seconds, :below => 100.megabytes, :times => [3,5]
+  end
+end
