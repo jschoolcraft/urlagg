@@ -9,8 +9,7 @@ after "deploy:update", "bluepill:quit", "bluepill:start"
 namespace :bluepill do
   desc "Stop processes that bluepill is monitoring and quit bluepill"
   task :quit, :roles => [:app] do
-    sudo "/opt/ruby-enterprise/bin/bluepill stop"
-    sudo "/opt/ruby-enterprise/bin/bluepill quit"
+    sudo "/opt/ruby-enterprise/bin/bluepill stop urlagg"
   end
  
   desc "Load bluepill configuration and start it"
