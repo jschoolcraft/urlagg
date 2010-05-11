@@ -17,3 +17,4 @@ public/sitemaps/*
 config/initializers/hoptoad.rb
 config/newrelic.yml
 
+Gemfile.lock
