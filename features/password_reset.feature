@@ -13,7 +13,7 @@ Feature: User should be able to reset their password
     Then I should see "An email has been sent with instructions to reset your password"
     And I should receive an email
     When I open the email
-    Then I should see "Password Reset Instructions" in the subject
+    Then I should see "Password Reset Instructions" in the email subject
     When I click the first link in the email
     Then I should see "Reset Password"
     And I fill in "password" with "newpassword"

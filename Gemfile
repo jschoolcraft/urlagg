@@ -15,7 +15,10 @@ group :test do
   gem "rspec"
   gem "rspec-rails"
   gem "remarkable_rails"
-  gem "cucumber", "0.3.7"
+  gem "cucumber"
+  gem "cucumber-rails"
+  gem "database_cleaner"
+  gem "launchy"
   gem 'email_spec'
   gem 'webrat'
   gem "factory_girl"
