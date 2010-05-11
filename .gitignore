@@ -18,3 +18,5 @@ config/initializers/hoptoad.rb
 config/newrelic.yml
 
 Gemfile.lock
+.bundle/config
+.bundle/environment.rb
