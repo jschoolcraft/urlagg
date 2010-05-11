@@ -22,12 +22,12 @@ config.action_controller.allow_forgery_protection    = false
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
 
-config.gem "rspec", :lib => false, :version => ">= 1.2.6"
-config.gem "rspec-rails", :lib => false, :version => ">= 1.2.6"
-config.gem "remarkable_rails", :lib => false, :version => ">= 3.0.10"
-config.gem "cucumber", :lib => false, :version => ">= 0.3.7"
+config.gem "rspec", :lib => false, :version => "= 1.2.6"
+config.gem "rspec-rails", :lib => false, :version => "= 1.2.6"
+config.gem "remarkable_rails", :lib => false, :version => "= 3.0.10"
+config.gem "cucumber", :lib => false, :version => "= 0.3.7"
 config.gem 'bmabey-email_spec', :lib => 'email_spec'
-config.gem 'webrat', :lib => false, :version => ">= 0.4.4"
+config.gem 'webrat', :lib => false, :version => "= 0.4.4"
 config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
 
 require "pp"

@@ -11,7 +11,7 @@ require 'open-uri'
 Rails::Initializer.run do |config|
   config.gem "authlogic", :version => "= 2.0.11"
   config.gem "json"
-  config.gem "ratom", :lib => 'atom', :version => ">= 0.6.0"
+  config.gem "ratom", :lib => 'atom'
   config.gem "mislav-will_paginate", :lib => "will_paginate"
   config.gem "haml"
   config.gem "newrelic_rpm"
