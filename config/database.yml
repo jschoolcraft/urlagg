@@ -1,0 +1,23 @@
+development:
+  adapter: mysql
+  host: localhost
+  username: root 
+  password: yagni
+  database: urlagg_development
+  
+test: &TEST
+  adapter: mysql
+  host: localhost
+  username: root 
+  password: yagni
+  database: urlagg_test
+
+production:
+  adapter: mysql
+  host: localhost
+  username: root 
+  password:
+  database: urlagg
+
+cucumber:
+  <<: *TEST

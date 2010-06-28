@@ -1,27 +1,45 @@
-ActionController::Routing::Routes.draw do |map|
-  map.login 'login', :controller => "user_sessions", :action => "new"
-  map.logout 'logout', :controller => "user_sessions", :action => "destroy", :method => :post
-  
-  map.connect '/tags/top', :controller => 'tags', :action => 'top'
-  map.connect '/tags/:tag', :controller => 'tags', :action => 'show', :requirements => {:tag => /\D.+/} 
-  map.resources :tags, :member => { :summary => :get, :read => :post }, :collection => { :top => :get }
-  
-  map.resource :user_session
-  map.resource :account
-  map.resources :users, :member => { :summary => :get }
-  map.resources :password_resets
-  map.resources :taggings
-  
-  map.connect   'pages/:id', :controller => 'pages', :action => 'show'
-  map.namespace :admin do |admin|
-    admin.dashboard 'dashboard', :controller => 'dashboard'
-    admin.login 'login', :controller => 'super_user_sessions', :action => "new"
-    admin.logout 'logout', :controller => "super_user_sessions", :action => "destroy", :method => :post
-    admin.resource :super_user_session
-    admin.resources :links, :collection => { :reports => :get }
-    admin.resources :tags
-    admin.resources :users
+Urlagg::Application.routes.draw do
+  match 'login' => 'user_sessions#new', :as => :login
+  match 'logout' => 'user_sessions#destroy', :as => :logout, :method => post
+  match '/tags/top' => 'tags#top'
+  match '/tags/:tag' => 'tags#show', :constraints => { :tag => /\D.+/ }
+
+  resources :tags do
+    collection do
+      get :top
+    end
+    member do
+      get :summary
+      post :read
+    end
   end
-  
-  map.root :controller => "pages", :action => "show", :index => 'index'
+
+  resource :user_session
+  resource :account
+  resources :users do
+
+    member do
+      get :summary
+    end
+
+  end
+
+  resources :password_resets
+  resources :taggings
+  match 'pages/:id' => 'pages#show'
+  namespace :admin do
+    match 'dashboard' => 'dashboard#index', :as => :dashboard
+    match 'login' => 'super_user_sessions#new', :as => :login
+    match 'logout' => 'super_user_sessions#destroy', :as => :logout, :method => post
+    resource :super_user_session
+    resources :links do
+      collection do
+        get :reports
+      end
+    end
+    resources :tags
+    resources :users
+  end
+
+  match '/' => 'pages#show', :index => 'index'
 end

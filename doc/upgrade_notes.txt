@@ -1,0 +1,105 @@
+(in /Volumes/Master/jschoolcraft/code/urlagg)
+[31m[1mDeprecated ERb helper calls[0m
+[37mBlock helpers that use concat (e.g., form_for) should use <%= instead of <%.  The current form will continue to work for now, but you will get deprecation warnings since this form will go away in the future.
+[1mMore information:[0m [36mhttp://weblog.rubyonrails.org/
+
+[37mThe culprits: 
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/views/accounts/edit.html.erb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/views/accounts/new.html.erb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/views/admin/super_user_sessions/new.html.erb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/views/password_resets/edit.html.erb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/views/password_resets/new.html.erb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/views/tags/_sidebar.html.erb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/views/tags/index.html.erb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/views/user_sessions/new.html.erb
+[0m
+[31m[1mDeprecated constant(s)[0m
+[37mConstants like RAILS_ENV, RAILS_ROOT, and RAILS_DEFAULT_LOGGER are now deprecated.
+[1mMore information:[0m [36mhttp://litanyagainstfear.com/blog/2010/02/03/the-rails-module/
+
+[37mThe culprits: 
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/lib/daemons/link_updater.rb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/lib/tasks/ci.rake
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/lib/tasks/rcov.rake
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/lib/tasks/rspec.rake
+[0m
+[31m[1mDeprecated ActionMailer API[0m
+[37mYou're using the old ActionMailer API to send e-mails in a controller, model, or observer.
+[1mMore information:[0m [36mhttp://lindsaar.net/2010/1/26/new-actionmailer-api-in-rails-3
+
+[37mThe culprits: 
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/models/user.rb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/controllers/password_resets_controller.rb
+[0m
+[31m[1mOld ActionMailer class API[0m
+[37mYou're using the old API in a mailer class.
+[1mMore information:[0m [36mhttp://lindsaar.net/2010/1/26/new-actionmailer-api-in-rails-3
+
+[37mThe culprits: 
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/models/notifier.rb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/models/notifier.rb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/models/notifier.rb
+[0m
+[31m[1mSoon-to-be-deprecated ActiveRecord calls[0m
+[37mMethods such as find(:all), find(:first), finds with conditions, and the :joins option will soon be deprecated.
+[1mMore information:[0m [36mhttp://m.onkey.org/2010/1/22/active-record-query-interface
+
+[37mThe culprits: 
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/controllers/admin/links_controller.rb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/models/tag.rb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/models/user.rb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/models/tag.rb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/models/tag.rb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/models/user.rb
+[0m
+[31m[1mnamed_scope is now just scope[0m
+[37mThe named_scope method has been renamed to just scope.
+[1mMore information:[0m [36mhttp://github.com/rails/rails/commit/d60bb0a9e4be2ac0a9de9a69041a4ddc2e0cc914
+
+[37mThe culprits: 
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/models/link.rb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/models/tag.rb
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/app/models/tagging.rb
+[0m
+[31m[1mDeprecated session secret setting[0m
+[37mPreviously, session secret was set directly on ActionController::Base; it's now config.secret_token.
+[1mMore information:[0m [36mhttp://lindsaar.net/2010/4/7/rails_3_session_secret_and_session_store
+
+[37mThe culprits: 
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/config/initializers/session_store.rb
+[0m
+[31m[1mOld Rails generator API[0m
+[37mA plugin in the app is using the old generator API (a new one may be available at http://github.com/trydionel/rails3-generators).
+[1mMore information:[0m [36mhttp://blog.plataformatec.com.br/2010/01/discovering-rails-3-generators/
+
+[37mThe culprits: 
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/vendor/plugins/daemon_generator/generators/
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/vendor/plugins/daemon_generator/generators/daemon/
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/vendor/plugins/daemon_generator/generators/daemon/templates/
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/vendor/plugins/resource_controller/generators/
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/vendor/plugins/resource_controller/generators/scaffold_resource/
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/vendor/plugins/resource_controller/generators/scaffold_resource/templates/
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/vendor/plugins/resource_controller/generators/scaffold_resource/templates/rspec/
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/vendor/plugins/resource_controller/generators/scaffold_resource/templates/rspec/views/
+[0m
+[31m[1mOld session store setting[0m
+[37mPreviously, session store was set directly on ActionController::Base; it's now config.session_store :whatever.
+[1mMore information:[0m [36mhttp://lindsaar.net/2010/4/7/rails_3_session_secret_and_session_store
+
+[37mThe culprits: 
+[33m	- /Volumes/Master/jschoolcraft/code/urlagg/config/initializers/session_store.rb
+[0m
+[31m[1mOld router API[0m
+[37mThe router API has totally changed.
+[1mMore information:[0m [36mhttp://yehudakatz.com/2009/12/26/the-rails-3-router-rack-it-up/
+
+[37mThe culprits: 
+[33m	- config/routes.rb
+[0m
+[31m[1mNew file needed: config/application.rb[0m
+[37mYou need to add a config/application.rb.
+[1mMore information:[0m [36mhttp://omgbloglol.com/post/353978923/the-path-to-rails-3-approaching-the-upgrade
+
+[37mThe culprits: 
+[33m	- config/application.rb
+[0m
