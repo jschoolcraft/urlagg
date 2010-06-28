@@ -4,7 +4,15 @@ dependencies:
     group: 
     - :default
     version: = 3.0.0.beta4
+  haml: 
+    group: 
+    - :default
+    version: ">= 0"
   mysql: 
+    group: 
+    - :default
+    version: ">= 0"
+  authlogic: 
     group: 
     - :default
     version: ">= 0"
@@ -49,8 +57,12 @@ specs:
     version: 3.0.0.beta4
 - activeresource: 
     version: 3.0.0.beta4
+- authlogic: 
+    version: 2.1.5
 - bundler: 
     version: 0.9.26
+- haml: 
+    version: 3.0.13
 - mysql: 
     version: 2.8.1
 - thor: 
@@ -59,7 +71,7 @@ specs:
     version: 3.0.0.beta4
 - rails: 
     version: 3.0.0.beta4
-hash: dbc402eca1d8b3bb14fa460912648d0e3652ab6d
+hash: af117196160c17f2f4bff8c0025dc6f1c7235fc0
 sources: 
 - Rubygems: 
     uri: http://rubygems.org

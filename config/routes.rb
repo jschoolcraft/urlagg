@@ -42,5 +42,5 @@ Urlagg::Application.routes.draw do
     resources :users
   end
 
-  match '/' => 'pages#show', :index => 'index'
+  root :to => 'pages#show', :index => 'index'
 end

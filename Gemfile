@@ -2,11 +2,11 @@ source "http://rubygems.org"
 
 gem "rails", "3.0.0.beta4"
 gem "mysql"
-# gem "authlogic"
+gem "authlogic"
 # gem "json"
 # gem "ratom", :require => 'atom'
 # gem "will_paginate"
-# gem "haml"
+gem "haml"
 # gem "newrelic_rpm"
 # gem "big_sitemap", :git => 'http://github.com/alexrabarts/big_sitemap.git'
 # gem "slim_scrooge"  
