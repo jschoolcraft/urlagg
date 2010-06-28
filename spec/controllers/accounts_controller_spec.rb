@@ -1,9 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe AccountsController do
-  include EmailSpec::Helpers
-  include EmailSpec::Matchers
-
   describe "POST /accounts/create" do
     it "should deliver the welcome email" do
       @user = Factory.stub(:user, :login => "john",  :email => 'john@example.com', :password => "secret", :password_confirmation => "secret")
