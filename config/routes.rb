@@ -1,6 +1,6 @@
 Urlagg::Application.routes.draw do
   match 'login' => 'user_sessions#new', :as => :login
-  match 'logout' => 'user_sessions#destroy', :as => :logout, :method => post
+  match 'logout' => 'user_sessions#destroy', :as => :logout, :method => :post
   match '/tags/top' => 'tags#top'
   match '/tags/:tag' => 'tags#show', :constraints => { :tag => /\D.+/ }
 
@@ -27,10 +27,11 @@ Urlagg::Application.routes.draw do
   resources :password_resets
   resources :taggings
   match 'pages/:id' => 'pages#show'
+  
   namespace :admin do
     match 'dashboard' => 'dashboard#index', :as => :dashboard
     match 'login' => 'super_user_sessions#new', :as => :login
-    match 'logout' => 'super_user_sessions#destroy', :as => :logout, :method => post
+    match 'logout' => 'super_user_sessions#destroy', :as => :logout, :method => :post
     resource :super_user_session
     resources :links do
       collection do
