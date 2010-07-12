@@ -10,5 +10,5 @@ Atom::Feed.new do |f|
     e.updated = @links && @links.first && @links.first.created_at
     e.content = Atom::Content::Html.new(render(:partial => 'tag.atom.erb', :object => @tag))
   end
-end.to_xml
+end.to_xml.html_safe
 %>

@@ -6,9 +6,9 @@ class Tag < ActiveRecord::Base
   validates_presence_of :name
   validates_format_of :name, :with => /^[\w\d\.#-]+$/, :on => :create, :message => "is invalid"
   
-  named_scope :ascending, :order => 'tags.name ASC'
-  named_scope :top, :order => "tags.taggings_count DESC, tags.name ASC", :limit => 9
-  named_scope :recent_taggings, :joins => :taggings, :group => "taggings.tag_id", :order => "taggings.created_at DESC", :limit => 5
+  scope :ascending, :order => 'tags.name ASC'
+  scope :top, :order => "tags.taggings_count DESC, tags.name ASC", :limit => 9
+  scope :recent_taggings, :joins => :taggings, :group => "taggings.tag_id", :order => "taggings.created_at DESC", :limit => 5
   
   def to_s
     name

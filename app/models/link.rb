@@ -6,8 +6,8 @@ class Link < ActiveRecord::Base
   has_many :tags, :through => :tagged_links
   validates_presence_of :url
   
-  # named_scope :today, :conditions => ["links.created_at > ?", Date.today.to_time], :order => "links.created_at desc"
-  named_scope :latest, :limit => 10, :order => "links.created_at desc"
+  # scope :today, :conditions => ["links.created_at > ?", Date.today.to_time], :order => "links.created_at desc"
+  scope :latest, :limit => 10, :order => "links.created_at desc"
   class << self
     def count_bookmarks(above)
       self.count(:all, :conditions => ['links.bookmarks > ?', above])
@@ -35,7 +35,7 @@ class Link < ActiveRecord::Base
   end
   
   def source_tags=(new_tags)
-    self.write_attribute(:source_tags, new_tags.join(','))
+    write_attribute(:source_tags, new_tags.join(','))
   end
   
   def source_tags

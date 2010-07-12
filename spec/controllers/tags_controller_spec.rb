@@ -147,9 +147,9 @@ describe TagsController do
   describe "handling GET /show for ATOM" do
   
     before do
-      @tag = stub_model(Tag, :links => [])
-      Tag.stub!(:find).and_return(@tag)
       @links = (1..20).map { |i| mock_model(Link, :url => "http://example-#{i}.com") } 
+      @tag = stub_model(Tag, :links => mock("links", :paginate => @link))
+      Tag.stub!(:find).and_return(@tag)
     end
   
     def do_get
@@ -168,7 +168,7 @@ describe TagsController do
     
     it "should render the show atom template" do
       do_get
-      response.should render_template('show.atom.erb')
+      response.should render_template('show')
     end
   end
     
@@ -197,7 +197,7 @@ describe TagsController do
     
     it "should render the summary template" do
       do_get
-      response.should render_template('summary.atom.erb')
+      response.should render_template('summary')
     end
   end
 

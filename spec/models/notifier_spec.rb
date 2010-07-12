@@ -17,12 +17,12 @@ describe "Emails" do
     end
 
     it "should contain the reset password instructions in the mail body" do
-      @email.should have_text(/A request to reset your password has been made/)
+      @email.should have_body_text(/A request to reset your password has been made/)
     end
 
     it "should contain a link to the password reset link" do
       pending "lost access to UrlWriter" do
-        @email.should have_text(/#{edit_password_reset_url(@user.perishable_token)}/)
+        @email.should have_body_text(/#{edit_password_reset_url(@user.perishable_token)}/)
       end
     end
 

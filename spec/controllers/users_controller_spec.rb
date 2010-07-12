@@ -59,7 +59,7 @@ describe UsersController do
     
     it "renders the summary templates" do
       do_get
-      response.should render_template('summary.atom.erb')
+      response.should render_template('summary')
     end
   end
 

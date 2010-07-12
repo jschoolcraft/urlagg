@@ -26,7 +26,7 @@ Urlagg::Application.routes.draw do
 
   resources :password_resets
   resources :taggings
-  match 'pages/:id' => 'pages#show'
+  match 'pages/:id' => 'pages#show', :id => 'index'
   
   namespace :admin do
     match 'dashboard' => 'dashboard#index', :as => :dashboard

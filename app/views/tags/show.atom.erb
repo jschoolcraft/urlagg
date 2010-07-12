@@ -14,5 +14,5 @@ Atom::Feed.new do |f|
       e.content = Atom::Content::Html.new(render(:partial => "link.atom.erb", :object => link, :locals => { :tag => @tag }))
     end
   end
-end.to_xml
+end.to_xml.html_safe
 %>

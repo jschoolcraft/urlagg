@@ -38,8 +38,8 @@ describe TaggedLink do
       @tag = Factory.create(:tag, :name => 'gtd')
       @tag.tagged_links.stub!(:find_by_link_id).and_return(nil)
       
-      @json_file = open(RAILS_ROOT + '/spec/fixtures/delicious/gtd.json')
-      @json = open(RAILS_ROOT + '/spec/fixtures/delicious/gtd.json').read
+      @json_file = open(File.join(Rails.root, '/spec/fixtures/delicious/gtd.json'))
+      @json = open(File.join(Rails.root, '/spec/fixtures/delicious/gtd.json')).read
       
       TaggedLink.stub!(:open).and_return(@json_file)
       
@@ -113,8 +113,8 @@ describe TaggedLink do
       @tag = Factory.create(:tag, :name => 'gtd')
       @tag.tagged_links.stub!(:find_by_link_id).and_return(nil)
       
-      @json_file = open(RAILS_ROOT + '/spec/fixtures/delicious/gtd-recent.json')
-      @json = open(RAILS_ROOT + '/spec/fixtures/delicious/gtd-recent.json').read
+      @json_file = open(File.join(Rails.root, '/spec/fixtures/delicious/gtd-recent.json'))
+      @json = open(File.join(Rails.root, '/spec/fixtures/delicious/gtd-recent.json')).read
       
       TaggedLink.stub!(:open).and_return(@json_file)
       

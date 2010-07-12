@@ -2,9 +2,9 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Tag do
    should_have_column :taggings_count, :type => :integer
-   should_have_named_scope :ascending
-   should_have_named_scope :top, :order => "tags.taggings_count DESC, tags.name ASC", :limit => 9
-   should_have_named_scope :recent_taggings
+   should_have_scope :ascending
+   should_have_scope :top, :order => "tags.taggings_count DESC, tags.name ASC", :limit => 9
+   should_have_scope :recent_taggings
 
   before(:each) do
     @valid_attributes = {

@@ -45,7 +45,7 @@ describe Link do
   describe "updating the bookmark count" do
     before(:each) do
       @link = Factory.create(:link)
-      @json_file = open(RAILS_ROOT + '/spec/fixtures/delicious/urlinfo.json')
+      @json_file = open(File.join(Rails.root, '/spec/fixtures/delicious/urlinfo.json'))
       @link.stub!(:open).and_return(@json_file)
     end
 
