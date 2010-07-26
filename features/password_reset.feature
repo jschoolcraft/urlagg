@@ -7,8 +7,8 @@ Feature: User should be able to reset their password
   Scenario: A registered user that forgot his password should be able to remember it
     Given a registered user "bob" with password "supersecret"
     When I go to the login page
-    And I follow "forgot password?"
-    And I fill in "email" with "bob@example.com"
+    And I follow "Forgot password?"
+    And I fill in "Email" with "bob@example.com"
     And I press "Reset my password"
     Then I should see "An email has been sent with instructions to reset your password"
     And I should receive an email
@@ -16,8 +16,8 @@ Feature: User should be able to reset their password
     Then I should see "Password Reset Instructions" in the email subject
     When I click the first link in the email
     Then I should see "Reset Password"
-    And I fill in "password" with "newpassword"
-    And I fill in "password confirmation" with "newpassword"
+    And I fill in "Password" with "newpassword"
+    And I fill in "Password confirmation" with "newpassword"
     And I press "Update my password and log me in"
     Then I should see "Password has been changed"
     And I should see "Welcome bob"

@@ -56,12 +56,10 @@ Given /^the following users, tracking tags, with one link$/ do |table|
 end
 
 Then /^I should see tags "([^\"]*)" in my sidebar under "([^\"]*)"$/ do |tags, heading|
-  response.should have_tag("#sidebar") do
-    with_tag 'div.section' do
-      with_tag('h3', heading)
-      tags.split(/,\s*/).each do |tag|
-        with_tag('li a', tag)
-      end
+  with_scope("#sidebar div.section") do
+    page.should have_css("h3", :text => heading)
+    tags.split(/,\s*/).each do |tag|
+      page.should have_css("li a", :text => tag)
     end
   end
 end

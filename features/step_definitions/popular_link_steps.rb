@@ -19,12 +19,11 @@ Then /^I should not see links (\d+)-(\d+) for "([^\"]*)"$/ do |first, last, tag|
   end
 end
 
-Then /^I should see a link with title "([^\"]*)" under the tag heading "([^\"]*)"$/ do |title, tag|
-  response.should have_tag("div.tag") do
-    with_tag("h3", tag)
-    with_tag "li" do
-      with_tag("a", title)
-    end
+Then /^I should see a link with title "([^\"]*)" under the tag heading "([^\"]*)"$/ do |title, tag_name|
+  tag = Tag.find_by_name(tag_name)
+  with_scope("#tag_#{tag.id}.tag") do
+    page.should have_xpath("//h3", :text => tag_name)
+    page.should have_xpath("//li/a", :text => title)
   end
 end
 
@@ -34,5 +33,5 @@ When /^I follow "([^\"]*)" for tag "([^\"]*)"$/ do |title, tag_name|
 end
 
 Then /^I should see pagination controls$/ do
-  response.should have_tag("div.pagination")
+  page.should have_css("div.pagination")
 end

@@ -4,7 +4,7 @@
     <%= link_to 'Mark all read', user_path(current_user), :method => :put, :params => { :last_viewed_tags_index_at => Time.now } %>
 </div>
 <div class="action grid_4 r">
-  <% form_for @tag, :url => taggings_path do |f| -%>
+  <%= form_for @tag, :url => taggings_path do |f| -%>
     <%= f.label :name, "Add tag" %>
     <%= f.text_field :name, :size => 15 %>
     <%= f.submit "Track" %>

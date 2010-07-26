@@ -20,6 +20,7 @@ Feature: A user should be able to see the popular links for their tracked tags
        | gtd   | http://gtd.com/foo                                     | Getting things doner | 
        | gtd   | http://thequeue.net/blog/not-getting-anything-done-gtd | GTD FAIL             | 
 
+  @show-page
   Scenario: Any user can see all popular links for a specific tag
     Given a registered user "Bob" with password "supersecret"
     And "Bob" is tracking tags "ruby"

@@ -14,7 +14,7 @@ Feature: A user should be able to mark links as read, so they're not shown the n
     And I should see:
       |tag    |title                |
       |ruby   |More ruby stuff      |
-    When I follow "Mark All Read"
+    When I follow "Mark all read"
     Then I should not see "More ruby stuff"
     And I should see "Sorry, we haven't found any updated links for the tags you are tracking."
 

@@ -4,12 +4,12 @@
 <link rel="alternate" href="<%= summary_tag_url(@tag, :format => 'atom') %>" type="application/atom+xml" title="Daily links for <%= @tag.name %>">
 <%- end -%>
 <div class="grid_6 r">
-  <%= link_to '&laquo; Back to tags', tags_path, :class => 'action' %> | 
+  <%= link_to '&laquo; Back to tags'.html_safe, tags_path, :class => 'action' %> | 
   <%- if current_user
     if current_user.tags.include?(@tag) -%>
-      <%= link_to "Stop tracking <strong>#{h(@tag)}</strong>", tagging_path(@tag), :confirm => 'Are you sure?', :method => :delete, :class => 'action important' %>
+      <%= link_to "Stop tracking <strong>#{h(@tag)}</strong>".html_safe, tagging_path(@tag), :confirm => 'Are you sure?', :method => :delete, :class => 'action important' %>
     <%- else -%>
-      <%= link_to "Start tracking <strong>#{h(@tag)}</strong>", taggings_path(:tag => {:name => @tag.name}), :method => :post, :class => 'action important' %>
+      <%= link_to "Start tracking <strong>#{h(@tag)}</strong>".html_safe, taggings_path(:tag => {:name => @tag.name}), :method => :post, :class => 'action important' %>
     <%- end -%>
   <%- end -%>
 </div>

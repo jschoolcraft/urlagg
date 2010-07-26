@@ -26,7 +26,7 @@
 
 module EmailHelpers
   def current_email_address
-    user = controller.send(:current_user)
+    user = @current_user
     user ? user.email : last_email_address || "bob@example.com"
   end
 end

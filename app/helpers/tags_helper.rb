@@ -26,6 +26,6 @@ module TagsHelper
       content_tag(:div, "Sorry, we haven't found any updated links for the tags you are tracking.", { :class => 'notice' })
     else
       result.join
-    end
+    end.html_safe
   end
 end

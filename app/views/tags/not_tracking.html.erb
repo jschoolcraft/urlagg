@@ -10,7 +10,7 @@
   </p>
   <p>
     <%- if current_user -%>
-      <%= link_to "Start tracking <strong>#{h(@tag)}</strong>", 
+      <%= link_to "Start tracking <strong>#{h(@tag)}</strong>".html_safe, 
                   taggings_path(:tag => {:name => @tag.name}), :method => :post, :class => 'action important' %> |
     <%- end -%>
     <%= link_to 'Go back to tags', tags_path, :class => 'action' %>

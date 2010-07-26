@@ -15,7 +15,7 @@ Feature: Users can track tags on delicious/popular
     And I should see "rails"
     And I should see "productivity"
     When I fill in "Add tag" with "gtd"
-    And I press "track"
+    And I press "Track"
     Then I should see "Now tracking gtd"
   
   Scenario: A logged in user only sees his tracked tags
@@ -30,7 +30,6 @@ Feature: Users can track tags on delicious/popular
     And I should see "rails"
     And I should see "gtd"
     And I should not see "photography"
-  
   Scenario: A logged in user can stop tracking tags
     Given the following users, tracking tags, with lots of links
       | user | tags                          |
@@ -39,7 +38,7 @@ Feature: Users can track tags on delicious/popular
     And I am on my tags page
     When I follow "photography"
     Then I should see "Popular links for photography"
-    When I follow "stop tracking"
+    When I follow "Stop tracking"
     Then I should see "Stopped tracking photography"
     And I should see "ruby"
     And I should see "productivity"
@@ -68,8 +67,8 @@ Feature: Users can track tags on delicious/popular
   Scenario Outline: Should be able to track tags with special characters
     Given a logged in user "Bob"
     And I am on my tags page
-    And I fill in "Add Tag" with "<tag>"
-    When I press "track"
+    And I fill in "Add tag" with "<tag>"
+    When I press "Track"
     Then I should see "Currently Tracking"
     And I should see "<tag>"
     

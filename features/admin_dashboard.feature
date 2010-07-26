@@ -1,3 +1,4 @@
+@ignore
 Feature: As the administrator of the site give me quick access to information
   In order to do lots of stuff
   As an administrator

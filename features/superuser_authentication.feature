@@ -1,3 +1,4 @@
+@ignore
 Feature: An administrator of the site should be able to log in
 
   Scenario: A registered super user can login and be directed to their tags page

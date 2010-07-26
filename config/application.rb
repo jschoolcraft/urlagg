@@ -3,9 +3,7 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 require 'open-uri'
 
-# explicit requires from Gemfile/bundler
-require 'Authlogic'
-require 'atom'
+Bundler.require(:default, Rails.env) if defined?(Bundler) 
 
 module Urlagg
   class Application < Rails::Application

@@ -49,7 +49,7 @@ describe TagsController do
   
   describe "GET show for HTML" do
     before do
-      @tag = stub_model(Tag)
+      @tag = mock_model(Tag, :links => mock("tag.links"))
       Tag.stub!(:find_by_name).and_return(@tag)
       Tag.stub!(:find).and_return(@tag)
       
@@ -224,7 +224,7 @@ describe TagsController do
   
   describe "handling POST read" do
     before(:each) do
-      login
+      login({}, :tags => mock("current_user.tags"))
       @tag = mock_model(Tag)
       @tag.stub!(:mark_read_for)
       current_user.tags.stub!(:find).and_return(@tag)

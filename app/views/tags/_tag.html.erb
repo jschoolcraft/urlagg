@@ -1,4 +1,4 @@
-<div class="tag">
+<div class="tag" id="<%= dom_id(tag) %>">
   <h3><%= link_to h(tag.name), tag_path(tag) %></h3>
   <%= link_to('mark read', read_tag_path(tag), :id => dom_id(tag, 'mark_read'), :method => :post) %>
   <ul>

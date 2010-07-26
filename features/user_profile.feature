@@ -11,17 +11,17 @@ Feature: User profile information
   Scenario: A user should be able to update their profile
     Given a logged in user "Bob"
     When I go to user's profile page
-    And I follow "edit"
-    And I fill in "email" with "new-email@example.com"
-    And I press "update"
+    And I follow "Edit"
+    And I fill in "Email" with "new-email@example.com"
+    And I press "Update"
     Then I should see "Account updated!"
   
   Scenario: A user shouldn't be able to update their profile with bad data
     Given a logged in user "Bob"
     When I go to user's profile page
-    And I follow "edit"
-    And I fill in "email" with "not-an-email"
-    And I press "update"
+    And I follow "Edit"
+    And I fill in "Email" with "not-an-email"
+    And I press "Update"
     Then I should see "email"
     
   Scenario: A logged in user shouldn't be able to create a new account
