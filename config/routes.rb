@@ -17,30 +17,13 @@ Urlagg::Application.routes.draw do
   resource :user_session
   resource :account
   resources :users do
-
     member do
       get :summary
     end
-
   end
 
   resources :password_resets
   resources :taggings
-  match 'pages/:id' => 'pages#show', :id => 'index'
-  
-  namespace :admin do
-    match 'dashboard' => 'dashboard#index', :as => :dashboard
-    match 'login' => 'super_user_sessions#new', :as => :login
-    match 'logout' => 'super_user_sessions#destroy', :as => :logout, :method => :post
-    resource :super_user_session
-    resources :links do
-      collection do
-        get :reports
-      end
-    end
-    resources :tags
-    resources :users
-  end
-
+  match 'pages/:id' => 'pages#show', :id => 'index'  
   root :to => 'pages#show', :index => 'index'
 end
