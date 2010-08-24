@@ -1,5 +1,5 @@
 HoptoadNotifier.configure do |config|
-  config.api_key = {:project => 'urlagg',
+  config.api_key = {:project => 'dagg',
                     :tracker => 'Bug',
                     :api_key => ENV['REDMINE_API_KEY'],
                     :category => 'Development',

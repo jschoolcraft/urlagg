@@ -7,18 +7,18 @@ Typus.setup do |config|
   # Configure the e-mail address which will be shown in Admin::Mailer.
   # When this option is define Typus will allow admin users to recover
   # lost passwords.
-  # config.mailer_sender = "admin@example.com"
+  # config.mailer_sender = "support@urlagg.com"
 
   # Define file attachment settings.
   # config.file_preview = :typus_preview
   # config.file_thumbnail = :typus_thumbnail
 
   # Authentication: :none, :http_basic
-  # config.authentication = :none
+  # config.authentication = :http_basic
 
   # Define username and password for http authentication
-  # config.username = "admin"
-  # config.password = "columbia"
+  config.username = "admin"
+  config.password = "columbia"
 
   # Define available languages on the admin interface.
   # config.available_locales = [:en]
