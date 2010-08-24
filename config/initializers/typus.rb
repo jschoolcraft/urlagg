@@ -14,7 +14,7 @@ Typus.setup do |config|
   # config.file_thumbnail = :typus_thumbnail
 
   # Authentication: :none, :http_basic
-  # config.authentication = :http_basic
+  config.authentication = :session
 
   # Define username and password for http authentication
   config.username = "admin"
