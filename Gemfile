@@ -7,7 +7,6 @@ gem "json"
 gem "ratom", :require => 'atom'
 gem "will_paginate", :git => "git://github.com/mislav/will_paginate.git", :branch => "rails3"
 gem "haml"
-gem "newrelic_rpm", "2.13.0.beta5"
 gem "slim_scrooge"
 gem "hoptoad_notifier", "~> 2.3.3"
 
