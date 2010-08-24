@@ -3,7 +3,7 @@ HoptoadNotifier.configure do |config|
                     :tracker => 'Bug',
                     :api_key => ENV['REDMINE_API_KEY'],
                     :category => 'Development',
-                    :assigned_to => 'admin',
+                    :assigned_to => 'jeff',
                     :priority => 5
                    }.to_yaml
   config.host = 'rm.thequeue.net'
