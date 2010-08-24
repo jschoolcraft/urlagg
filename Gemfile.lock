@@ -4,15 +4,15 @@ dependencies:
     group: 
     - :default
     version: = 3.0.0.beta4
+  pg: 
+    group: 
+    - :default
+    version: ">= 0"
   haml: 
     group: 
     - :default
     version: ">= 0"
   authlogic: 
-    group: 
-    - :default
-    version: ">= 0"
-  mysql: 
     group: 
     - :default
     version: ">= 0"
@@ -211,10 +211,10 @@ specs:
     version: 0.3.7
 - libxml-ruby: 
     version: 1.1.4
-- mysql: 
-    version: 2.8.1
 - newrelic_rpm: 
     version: 2.13.0.beta5
+- pg: 
+    version: 0.9.0
 - thor: 
     version: 0.13.8
 - railties: 
@@ -246,7 +246,7 @@ specs:
 - will_paginate: 
     version: 3.0.pre2
     source: 1
-hash: 4ab24f624cdd54b0950740480e26c99b6ff8553e
+hash: fcf9660e6424d14bbd64ea1118bb39436e967d8c
 sources: 
 - Git: 
     uri: git://github.com/bmabey/email-spec.git

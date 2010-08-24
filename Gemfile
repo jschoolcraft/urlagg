@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem "rails", "3.0.0.beta4"
-gem "mysql"
+gem "pg"
 gem "authlogic", :git => "git://github.com/odorcicd/authlogic.git", :branch => 'rails3'
 gem "json"
 gem "ratom", :require => 'atom'

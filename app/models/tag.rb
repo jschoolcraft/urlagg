@@ -8,7 +8,10 @@ class Tag < ActiveRecord::Base
   
   scope :ascending, :order => 'tags.name ASC'
   scope :top, :order => "tags.taggings_count DESC, tags.name ASC", :limit => 9
-  scope :recent_taggings, :joins => :taggings, :group => "taggings.tag_id", :order => "taggings.created_at DESC", :limit => 5
+  scope :recent_taggings,
+    :joins => :taggings,
+    :group => "taggings.tag_id, taggings.created_at, #{Tag.column_names.map { |c| "#{Tag.quoted_table_name}.#{Tag.connection.quote_column_name(c)}" }.join(', ')}",
+    :order => "taggings.created_at DESC", :limit => 5
   
   def to_s
     name
@@ -37,10 +40,10 @@ class Tag < ActiveRecord::Base
   
   def links_after(time)
     if time
-      self.links.find(:all, :conditions => [ "links.created_at >= ?", time], :order => "links.created_at desc", :limit => 15)
-    else                     
-      self.links.find :all, :order => "links.created_at desc", :limit => 15
-    end
+      links.where([ "links.created_at >= ?", time])
+    else
+      links
+    end.order("links.created_at desc").limit(15).all
   end
 
   def mark_read_for(user)

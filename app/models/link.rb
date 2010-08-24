@@ -6,11 +6,10 @@ class Link < ActiveRecord::Base
   has_many :tags, :through => :tagged_links
   validates_presence_of :url
   
-  # scope :today, :conditions => ["links.created_at > ?", Date.today.to_time], :order => "links.created_at desc"
   scope :latest, :limit => 10, :order => "links.created_at desc"
   class << self
     def count_bookmarks(above)
-      self.count(:all, :conditions => ['links.bookmarks > ?', above])
+      where(['links.bookmarks > ?', above]).count
     end
     
     def threshold
@@ -18,11 +17,9 @@ class Link < ActiveRecord::Base
     end
     
     def needing_bookmarks_updated(threshold=Link.threshold, freshness=1.week.ago, limit=200)
-      self.all(
-        :conditions => [ "(links.bookmarks <= ? AND links.updated_at >= ?)", threshold, freshness],
-        :order => "links.bookmarks ASC, links.updated_at DESC",
-        :limit => limit
-      )
+      where([ "(links.bookmarks <= ? AND links.updated_at >= ?)", threshold, freshness]).
+      order("links.bookmarks ASC, links.updated_at DESC").
+      limit(limit).all
     end
     
     def pause_updates

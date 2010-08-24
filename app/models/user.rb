@@ -54,18 +54,21 @@ class User < ActiveRecord::Base
   
   private
   def popular_links(options={})
-    conditions_str  = ["users.id = ?"]
-    conditions_args = [self.id]
+    # LEFT OUTER JOIN `tagged_links` ON tagged_links.link_id = links.id 
+    # LEFT OUTER JOIN `tags` ON `tags`.id = `tagged_links`.tag_id 
+    # LEFT OUTER JOIN `taggings` ON taggings.tag_id = tags.id 
+    # LEFT OUTER JOIN `users` ON `users`.id = `taggings`.user_id
     
-    conditions = [conditions_str.join(' AND '), *conditions_args]
+    group_by = Link.column_names.map { |c| "#{Link.quoted_table_name}.#{Link.connection.quote_column_name(c)}" }.join(', ')
     
-    Link.find(:all, :group => 'links.id',
-      :joins => %Q{
-            LEFT OUTER JOIN `tagged_links` ON tagged_links.link_id = links.id 
-            LEFT OUTER JOIN `tags` ON `tags`.id = `tagged_links`.tag_id 
-            LEFT OUTER JOIN `taggings` ON taggings.tag_id = tags.id 
-            LEFT OUTER JOIN `users` ON `users`.id = `taggings`.user_id
-          }, 
-      :limit => options[:limit], :conditions => conditions, :order => "links.created_at desc")
+    Link.
+      joins(%{LEFT OUTER JOIN #{TaggedLink.quoted_table_name} ON #{TaggedLink.quoted_table_name}.#{TaggedLink.connection.quote_column_name(:link_id)} = #{Link.quoted_table_name}.#{Link.connection.quote_column_name(:id)}}).
+      joins(%{LEFT OUTER JOIN #{Tag.quoted_table_name} ON #{Tag.quoted_table_name}.#{Tag.connection.quote_column_name(:id)} = #{TaggedLink.quoted_table_name}.#{TaggedLink.connection.quote_column_name(:tag_id)}}).
+      joins(%{LEFT OUTER JOIN #{Tagging.quoted_table_name} ON #{Tagging.quoted_table_name}.#{Tag.connection.quote_column_name(:tag_id)} = #{Tag.quoted_table_name}.#{Tag.connection.quote_column_name(:id)}}).
+      joins(%{LEFT OUTER JOIN #{User.quoted_table_name} ON #{User.quoted_table_name}.#{User.connection.quote_column_name(:id)} = #{Tagging.quoted_table_name}.#{Tagging.connection.quote_column_name(:user_id)}}).
+      where(["#{User.quoted_table_name}.#{User.connection.quote_column_name(:id)} = ?", self.id]).
+      order("#{Link.quoted_table_name}.#{Link.connection.quote_column_name(:created_at)} desc").
+      limit(options[:limit]).
+      group(group_by).all
   end
 end
