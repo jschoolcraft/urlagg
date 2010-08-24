@@ -19,5 +19,6 @@ RSpec.configure do |config|
   end
 
   def user_session(stubs = {}, user_stubs = {})
+    @current_user_session ||= mock(UserSession, {:user => current_user(user_stubs)}.merge(stubs))
   end
 end

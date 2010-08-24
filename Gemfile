@@ -12,8 +12,8 @@ gem "slim_scrooge"
 gem "hoptoad_notifier", "~> 2.3.3"
 
 group :cucumber, :test do
-  gem "rspec",                    "2.0.0.beta.14"
-  gem "rspec-rails",              "2.0.0.beta.14.1"
+  gem "rspec",                    "2.0.0.beta.20"
+  gem "rspec-rails",              "2.0.0.beta.20"
   gem "database_cleaner",         "0.5.2"
   gem 'email_spec',       :git => "git://github.com/bmabey/email-spec.git", :branch => "rails3"
   gem "factory_girl",     :require => false
@@ -23,10 +23,10 @@ group :cucumber, :test do
 end
 
 group :cucumber do
-  gem "cucumber",                 "0.8.3"
-  gem "cucumber-rails",           "0.3.2"
+  gem "cucumber",                 "~> 0.8.3"
+  gem "cucumber-rails",           "~> 0.3.2"
   gem "launchy"
-  gem "capybara",                 "0.3.9"                 
+  gem "capybara",                 "~> 0.3.9"                 
 end
 
 group :test do
