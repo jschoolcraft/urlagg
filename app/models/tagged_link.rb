@@ -4,7 +4,7 @@ class TaggedLink < ActiveRecord::Base
   
   class << self
     def fetch_log(message, indent=0)
-      # FETCH_LOG.info("#{' ' * indent}#{message}")
+      Rails.logger.info("#{' ' * indent}#{message}")
     end
     
     def fetch_links_for_all_tags

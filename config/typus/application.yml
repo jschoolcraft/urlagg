@@ -22,16 +22,6 @@ Link:
   search: title
   application: urlagg
 
-SuperUser:
-  fields:
-    default: login, email, login_count, last_request_at, last_login_at, current_login_at, last_login_ip, current_login_ip
-    form: login, email, login_count, last_request_at, last_login_at, current_login_at, last_login_ip, current_login_ip
-  order_by: 
-  relationships: 
-  filters: 
-  search: 
-  application: urlagg
-
 Tag:
   fields:
     default: name, taggings_count
@@ -50,6 +40,8 @@ TaggedLink:
   relationships: link, tag
   filters: 
   search: 
+  actions:
+    index: fetch_links
   application: urlagg
 
 Tagging:
@@ -69,6 +61,6 @@ User:
   order_by: 
   relationships: taggings, tags
   filters: 
-  search: 
+  search: login, email
   application: urlagg
 

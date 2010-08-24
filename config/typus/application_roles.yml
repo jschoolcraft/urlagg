@@ -5,8 +5,7 @@
 admin:
   Configuration: create, read, update, delete
   Link: create, read, update, delete
-  SuperUser: create, read, update, delete
   Tag: create, read, update, delete
-  TaggedLink: create, read, update, delete
+  TaggedLink: create, read, update, delete, fetch_links
   Tagging: create, read, update, delete
   User: create, read, update, delete
