@@ -1,5 +1,5 @@
 class Admin::LinksController < Admin::Base
-  resource_controller
+  # resource_controller
   
   def reports
     @links_without_bookmarks = Link.count(:all, :conditions => ['links.bookmarks = 0'])

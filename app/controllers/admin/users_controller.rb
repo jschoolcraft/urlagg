@@ -1,5 +1,5 @@
 class Admin::UsersController < Admin::Base 
-  resource_controller
+  # resource_controller
   
   protected
     def collection
