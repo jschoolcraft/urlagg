@@ -10,7 +10,7 @@ gem "haml"
 gem "slim_scrooge"
 gem "hoptoad_notifier", "~> 2.3.3"
 
-if [:cucumber, :test].include?(Rails.env.symbolize)
+if ["cucumber", "test"].include?(ENV['RAILS_ENV'])
   group :cucumber, :test do
     gem "rspec",                    "2.0.0.beta.20"
     gem "rspec-rails",              "2.0.0.beta.20"
