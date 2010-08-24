@@ -16,6 +16,13 @@ dependencies:
     group: 
     - :default
     version: ">= 0"
+  autotest-fsevent: 
+    group: 
+    - :cucumber
+    - :test
+    version: = 0.2.2
+    require: []
+
   ratom: 
     group: 
     - :default
@@ -26,25 +33,39 @@ dependencies:
     group: 
     - :default
     version: = 2.13.0.beta5
+  autotest: 
+    group: 
+    - :cucumber
+    - :test
+    version: = 4.3.2
+    require: []
+
   rspec: 
     group: 
     - :cucumber
     - :test
     version: = 2.0.0.beta.14
-  rspec-rails: 
-    group: 
-    - :cucumber
-    - :test
-    version: = 2.0.0.beta.14.1
   database_cleaner: 
     group: 
     - :cucumber
     - :test
     version: = 0.5.2
+  rspec-rails: 
+    group: 
+    - :cucumber
+    - :test
+    version: = 2.0.0.beta.14.1
   remarkable_activerecord: 
     group: 
     - :test
     version: = 4.0.0.alpha4
+  factory_girl: 
+    group: 
+    - :cucumber
+    - :test
+    version: ">= 0"
+    require: []
+
   json: 
     group: 
     - :default
@@ -53,13 +74,6 @@ dependencies:
     group: 
     - :default
     version: ">= 0"
-  factory_girl: 
-    group: 
-    - :cucumber
-    - :test
-    version: ">= 0"
-    require: []
-
   cucumber-rails: 
     group: 
     - :cucumber
@@ -68,6 +82,10 @@ dependencies:
     group: 
     - :cucumber
     version: = 0.8.3
+  hoptoad_notifier: 
+    group: 
+    - :default
+    version: ~> 2.3.3
   email_spec: 
     group: 
     - :cucumber
@@ -81,6 +99,13 @@ dependencies:
     group: 
     - :default
     version: ">= 0"
+  autotest-rails: 
+    group: 
+    - :cucumber
+    - :test
+    version: = 4.1.0
+    require: []
+
   capybara: 
     group: 
     - :cucumber
@@ -88,6 +113,8 @@ dependencies:
 specs: 
 - rake: 
     version: 0.8.7
+- ZenTest: 
+    version: 4.3.3
 - abstract: 
     version: 1.0.0
 - activesupport: 
@@ -103,11 +130,11 @@ specs:
 - rack: 
     version: 1.1.0
 - rack-mount: 
-    version: 0.6.9
+    version: 0.6.12
 - rack-test: 
     version: 0.5.4
 - tzinfo: 
-    version: 0.3.22
+    version: 0.3.23
 - actionpack: 
     version: 3.0.0.beta4
 - mime-types: 
@@ -129,20 +156,28 @@ specs:
 - authlogic: 
     version: 2.1.3
     source: 2
+- autotest: 
+    version: 4.3.2
+- sys-uname: 
+    version: 0.8.4
+- autotest-fsevent: 
+    version: 0.2.2
+- autotest-rails: 
+    version: 4.1.0
 - bundler: 
     version: 0.9.26
 - culerity: 
-    version: 0.2.10
+    version: 0.2.12
 - nokogiri: 
-    version: 1.4.2
+    version: 1.4.3.1
 - ffi: 
     version: 0.6.3
 - json_pure: 
-    version: 1.4.3
+    version: 1.4.6
 - rubyzip: 
     version: 0.9.4
 - selenium-webdriver: 
-    version: 0.0.27
+    version: 0.0.28
 - capybara: 
     version: 0.3.9
 - configuration: 
@@ -165,11 +200,13 @@ specs:
     version: 0.6.2
     source: 0
 - factory_girl: 
-    version: 1.3.1
+    version: 1.3.2
 - haml: 
-    version: 3.0.13
+    version: 3.0.17
+- hoptoad_notifier: 
+    version: 2.3.5
 - json: 
-    version: 1.4.3
+    version: 1.4.6
 - launchy: 
     version: 0.3.7
 - libxml-ruby: 
@@ -207,20 +244,20 @@ specs:
 - slim_scrooge: 
     version: 1.0.10
 - will_paginate: 
-    version: 3.0.pre
+    version: 3.0.pre2
     source: 1
-hash: e918ed12cada1a7be4bd905d830024db80ea0e00
+hash: 4ab24f624cdd54b0950740480e26c99b6ff8553e
 sources: 
 - Git: 
     uri: git://github.com/bmabey/email-spec.git
     branch: rails3
     git: git://github.com/bmabey/email-spec.git
-    ref: 9297abaf30fa55c3a2cc71e5384964966ed8f640
+    ref: e197a167a3f89cba6848ba144e342537e1cf64ab
 - Git: 
     uri: git://github.com/mislav/will_paginate.git
     branch: rails3
     git: git://github.com/mislav/will_paginate.git
-    ref: 60aa1c7b2ef03ee7c7a5ed657efb479a69f7d128
+    ref: 36159385c8a5837fc63fe901ebe0a88205b5ce8d
 - Git: 
     uri: git://github.com/odorcicd/authlogic.git
     branch: rails3

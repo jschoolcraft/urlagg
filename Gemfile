@@ -9,7 +9,8 @@ gem "will_paginate", :git => "git://github.com/mislav/will_paginate.git", :branc
 gem "haml"
 gem "newrelic_rpm", "2.13.0.beta5"
 # gem "big_sitemap", :git => 'http://github.com/alexrabarts/big_sitemap.git'
-gem "slim_scrooge"  
+gem "slim_scrooge"
+gem "hoptoad_notifier", "~> 2.3.3"
 
 group :cucumber, :test do
   gem "rspec",                    "2.0.0.beta.14"
@@ -17,6 +18,9 @@ group :cucumber, :test do
   gem "database_cleaner",         "0.5.2"
   gem 'email_spec',       :git => "git://github.com/bmabey/email-spec.git", :branch => "rails3"
   gem "factory_girl",     :require => false
+  gem "autotest",                 "4.3.2", :require => false
+  gem "autotest-fsevent",         "0.2.2", :require => false
+  gem "autotest-rails",           "4.1.0", :require => false
 end
 
 group :cucumber do
