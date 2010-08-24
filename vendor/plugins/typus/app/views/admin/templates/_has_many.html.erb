@@ -1,0 +1,24 @@
+<a name="<%= field %>"></a>
+<div class="box_relationships" id="<%= model_to_relate_as_resource %>">
+
+  <h2>
+    <%= link_to model_to_relate.model_name.human.pluralize,
+                { :controller => "admin/#{model_to_relate_as_resource}", foreign_key => @item.id },
+                :title => _("%{model} filtered by %{filtered_by}",
+                            :model => model_to_relate.model_name.human.pluralize,
+                            :filtered_by => @item.to_label) %>
+    <%= add_new %>
+  </h2>
+
+  <%= form %>
+
+  <% unless @items.count.zero? -%>
+    <%= table %>
+    <%= pagination(:anchor => model_to_relate.to_resource) %>
+  <% else %>
+    <div id="flash" class="notice">
+      <p><%= _("There are no %{records}.", :records => model_to_relate.model_name.human.pluralize.downcase) %></p>
+    </div>
+  <% end %>
+
+</div>

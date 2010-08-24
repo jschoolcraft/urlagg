@@ -1,0 +1,12 @@
+# Typus Roles Configuration File
+#
+# Use the README file as a reference to customize settings.
+
+admin:
+  Configuration: create, read, update, delete
+  Link: create, read, update, delete
+  SuperUser: create, read, update, delete
+  Tag: create, read, update, delete
+  TaggedLink: create, read, update, delete
+  Tagging: create, read, update, delete
+  User: create, read, update, delete

@@ -1,0 +1,13 @@
+ru:
+  activerecord:
+    models:
+      typus_user:
+    attributes:
+      typus_user:
+        email:
+        first_name:
+        last_name:
+        password:
+        password_confirmation:
+        status:
+        role:

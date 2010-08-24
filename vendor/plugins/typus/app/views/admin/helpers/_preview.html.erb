@@ -1,0 +1,13 @@
+<% if has_file_preview && file_preview_is_image %>
+  <% content_for :javascripts do %>
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() {
+        $("#<%= dom_id(item, "#{attribute}_preview") %>").fancybox();
+      });
+    </script>
+  <% end %>
+<% end %>
+
+<a id="<%= dom_id(item, "#{attribute}_preview") %>"
+   href="<%= href %>"
+   title="<%= item.to_label %>"><%= content %></a>

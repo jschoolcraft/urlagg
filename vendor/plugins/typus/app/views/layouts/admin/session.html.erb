@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="<%= I18n.locale %>">
+
+<head>
+
+<!--
+
+  Ruby on Rails easy-to-use interface to allow trusted users
+  edit structured content. (Admin scaffold generator)
+
+  Get the code at http://github.com/fesplugas/typus
+
+-->
+
+  <meta charset="utf-8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <title><%= yield :title %></title>
+
+  <%= stylesheet_link_tag "/admin/stylesheets/screen",
+                          "/admin/stylesheets/application" %>
+
+</head>
+
+<body id="account">
+
+  <div id="wrapper">
+
+    <div id="box">
+      <h1 class="logo"><%= Typus.admin_title %></h1>
+      <%= display_flash_message %>
+      <%= yield %>
+    </div>
+
+    <div id="footer">
+      <%= Typus.admin_sub_title.html_safe %>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+<%= form_tag :action => :relate, :id => @item.id do %>
+  <%= hidden_field :related, :model, :value => model_to_relate %>
+  <p><%= select :related, :id, items_to_relate.collect { |f| [f.to_label, f.id] }.sort_by { |e| e.first } %> &nbsp; <%= submit_tag _("Add"), :class => "button" %></p>
+<% end %>

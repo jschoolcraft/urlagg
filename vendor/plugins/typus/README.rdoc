@@ -1,0 +1,47 @@
+= Typus: Admin interface for Rails applications
+
+Typus is designed for a single activity:
+
+    Trusted users editing structured content.
+
+Typus doesn't try to be all the things to all the people but it's extensible
+enough to match lots of use cases.
+
+== Key Features
+
+- Authentication by session or http.
+- Access control by users and roles (only on session authentication).
+- Create, edit, search and filter data.
+- Internationalized interface.
+- Extensible and overwritable templates.
+- Supports ActiveRecord.
+- Works with Rails 3 and is Ruby 1.9 compatible.
+- Tested with SQLite, MySQL, and PostgreSQL.
+- MIT License.
+
+== Links
+
+- {Project page}[http://core.typuscms.com/]
+- {Documentation}[http://core.typuscms.com/]
+- {Plugin source code}[http://github.com/fesplugas/typus]
+- {Mailing list}[http://groups.google.com/group/typus]
+- {Bug reports}[http://github.com/fesplugas/typus/issues]
+- {Gems}[http://rubygems.org/gems/typus]
+- {Contributors}[http://github.com/fesplugas/typus/contributors]
+
+== Installing
+
+Install from GitHub the latest version which it's compatible with
+<tt>Rails 3.0.0.beta4</tt>.
+
+    $ rails plugin install git://github.com/fesplugas/typus.git -r 3-0-unstable
+
+Once installed, run the generator to create required files.
+
+    $ rails generate typus
+
+Start the application server and go to {http://0.0.0.0:3000/admin}[http://0.0.0.0:3000/admin].
+
+== License
+
+Copyright &copy; 2007-2010 Francesc Esplugas, released under the MIT license.

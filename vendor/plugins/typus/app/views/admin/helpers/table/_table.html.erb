@@ -1,0 +1,22 @@
+<table>
+
+  <thead>
+    <tr>
+      <% headers.each do |header| %>
+        <th><%= header %></th>
+      <% end %>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <% items.each do |item| %>
+    <tr class="<%= cycle('even', 'odd') %>" id="<%= dom_id(item) %>">
+      <% table_fields_for_item(item, fields, link_options).each do |field| %>
+        <%= field %>
+      <% end %>
+      <td width="10px"><%= table_default_action(model, item) %></td>
+      <td width="10px"><%= table_action(model, item) %></td>
+    </tr>
+  <% end %>
+
+</table>

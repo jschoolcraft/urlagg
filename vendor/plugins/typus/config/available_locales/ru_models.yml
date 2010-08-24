@@ -1,0 +1,13 @@
+ru:
+  activerecord:
+    models:
+      typus_user: "Системный пользователь"
+    attributes:
+      typus_user:
+        email:
+        first_name: "Имя"
+        last_name: "Фамлия"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
+        status: "Статус"
+        role:

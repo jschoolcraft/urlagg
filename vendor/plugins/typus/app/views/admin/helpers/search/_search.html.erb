@@ -1,0 +1,12 @@
+<div id="search">
+
+  <%= form_tag url_for(:controller => params[:controller]), :method => :get do %>
+    <ul>
+      <li><input id="quicksearch" name="search" type="text" title="<%= params[:search] || "Search" %>"/></li>
+    </ul>
+    <% hidden_params.each do |field| %>
+      <%= field %>
+    <% end %>
+  <% end %>
+
+</div>

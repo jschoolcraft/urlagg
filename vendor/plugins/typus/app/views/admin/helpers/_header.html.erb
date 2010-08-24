@@ -1,0 +1,7 @@
+<h1 class="logo">
+  <% if Rails.application.routes.routes.map(&:name).include?(:root) %>
+    <%= link_to Typus.admin_title, root_path, :title => _("View site") %>
+  <% else %>
+    <%= Typus.admin_title %>
+  <% end %>
+</h1>

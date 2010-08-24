@@ -1,0 +1,17 @@
+<div class="box_relationships" id="<%= model_to_relate_as_resource %>">
+
+  <h2>
+    <%= model_to_relate.model_name.human.pluralize %>
+    <small><%= add_new %></small>
+  </h2>
+
+  <%= form %>
+
+  <% unless @items.count.zero? -%>
+    <%= table %>
+    <%= pagination(:anchor => model_to_relate.to_resource) %>
+  <% else %>
+    <p><%= _("There are no %{records}.", :records => model_to_relate.model_name.human.pluralize.downcase) %></p>
+  <% end %>
+
+</div>

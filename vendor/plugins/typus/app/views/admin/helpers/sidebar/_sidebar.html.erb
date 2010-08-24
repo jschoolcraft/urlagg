@@ -1,0 +1,17 @@
+<% resources.each do |key, value| %>
+
+  <% resource = "/admin/#{key.constantize.to_resource}" %>
+
+  <%= link_to :controller => resource, :action => "index" do %>
+    <h3><%= _(key.constantize.model_name.human.pluralize) %></h3>
+  <% end %>
+
+  <% if @resource.name.eql?(key) %>
+    <ul>
+      <% value.each do |v| %>
+        <li><%= v %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+<% end %>

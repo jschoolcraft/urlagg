@@ -1,0 +1,31 @@
+<div id="filters">
+
+  <ul>
+
+    <%= form_tag nil, :method => :get do %>
+
+      <% filters.each do |filter| %>
+
+        <li>
+          <select name="<%= filter[:filter] %>">
+            <option value=""><%= filter[:message] %></option>
+            <% filter[:items].each do |key, value| %>
+            <% selected = "selected" if params[filter[:filter]].eql?(key.to_s) %>
+            <option <%= selected %> value="<%= key %>"><%= value %></option>
+            <% end %>
+          </select>
+        </li>
+
+      <% end %>
+
+    <%= hidden_field_tag :search, params[:search] %>
+
+    <li>
+      <%= submit_tag _("Filter"), :name => nil %>
+    </li>
+
+    <% end %>
+
+  </ul>
+
+</div>

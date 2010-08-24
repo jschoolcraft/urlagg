@@ -1,0 +1,26 @@
+<%= form_for @item, :url  => options, :html => { :multipart => true } do |form| %>
+
+  <% if @item.errors.any? %>
+  <div id="errorExplanation">
+    <h3><%= pluralize(@item.errors.count, "error") %> prohibited this page from being saved:</h3>
+    <ul>
+    <% @item.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <fieldset class="inputs">
+    <ol>
+      <%= raw build_form(@fields, form) %>
+    </ol>
+  </fieldset>
+
+  <fieldset class="buttons">
+    <ol>
+      <li><%= submit_tag button , :class => "commit" %> or <%= link_to _("Cancel and go back").downcase, :action => "index" %></li>
+    </ol>
+  </fieldset>
+
+<% end %>

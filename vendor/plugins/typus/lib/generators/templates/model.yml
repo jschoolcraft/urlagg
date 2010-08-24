@@ -1,0 +1,10 @@
+admin:
+  first_name: Admin
+  last_name: Example
+  role: admin
+  email: admin@example.com
+  status: true
+  token: 1A2B3C4D5E6F
+  salt: admin
+  crypted_password: <%= Digest::SHA1.hexdigest("--admin--#{12345678}--") %>
+  preferences: { :locale => :en }
