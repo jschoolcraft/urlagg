@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "rails", "3.0.0.beta4"
+gem "rails", "3.0.0.rc2"
 gem "pg"
 gem "authlogic", :git => "git://github.com/odorcicd/authlogic.git", :branch => 'rails3'
 gem "json"
@@ -8,7 +8,6 @@ gem "ratom", :require => 'atom'
 gem "will_paginate", :git => "git://github.com/mislav/will_paginate.git", :branch => "rails3"
 gem "haml"
 gem "newrelic_rpm", "2.13.0.beta5"
-# gem "big_sitemap", :git => 'http://github.com/alexrabarts/big_sitemap.git'
 gem "slim_scrooge"
 gem "hoptoad_notifier", "~> 2.3.3"
 
@@ -33,3 +32,5 @@ end
 group :test do
   gem "remarkable_activerecord",  "4.0.0.alpha4"
 end
+
+# gem "big_sitemap", :git => 'http://github.com/alexrabarts/big_sitemap.git'
