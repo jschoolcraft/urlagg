@@ -8,7 +8,7 @@ describe "Emails" do
   describe "Password reset email" do
     before(:all) do
       @user = Factory.stub(:registered_user)
-      @email = Notifier.create_password_reset_instructions(@user)
+      @email = Notifier.password_reset_instructions(@user).deliver
       # default_url_options[:host] = "urlagg.com"
     end
 
