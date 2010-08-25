@@ -1,0 +1,21 @@
+<%
+  page_title = _("Sign in")
+  title(page_title)
+%>
+
+<%= form_for :typus_user, :url => { :action => :create, :back_to => params[:back_to] } do |form| %>
+
+  <ul>
+
+    <li>
+      <%= form.label :email, Typus.user_class.human_attribute_name(:email) %>
+      <%= form.text_field :email, :size => 20, :class => "text" %>
+    </li>
+
+    <li>
+      <%= form.label :password, Typus.user_class.human_attribute_name(:password) %>
+      <%= form.password_field :password, :size => 20, :class => "text" %>
+    </li>
+  </ul>
+
+<% end %>

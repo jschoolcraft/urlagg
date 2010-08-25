@@ -1,0 +1,37 @@
+<%
+  page_title = _("%{resources}", :resources => @resource.model_name.human.pluralize)
+  title(page_title)
+%>
+
+<% content_for :sidebar, build_sidebar %>
+
+<h2>
+  <%= page_title %>
+  <small><%= remove_filter_link %></small>
+</h2>
+
+<%= display_flash_message %>
+<%= typus_block %>
+
+<% if (build_filters || search) && !@resource.count.zero? %>
+  <div class="filters">
+    <%= build_filters %>
+    <%= search %>
+  </div>
+<% end %>
+
+<% unless @items.count.zero? -%>
+  <%= raw build_list(@resource, @fields, @items) %>
+  <%= pagination %>
+<% else %>
+  <% if @resource.count.zero? %>
+    <p>
+      <%= _("There are no %{records}.", :records => @resource.model_name.human.pluralize.downcase) %>
+      <%= link_to _("Create one now."), { :action => "new" } if @current_user.can?('create', @resource) %>
+    </p>
+  <% else %>
+    <div class="flash notice">
+      <%= _("There are no %{records} under this filter.", :records => @resource.model_name.human.pluralize.downcase) %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,6 @@
+<ul>
+  <li><%= link_to _("Dashboard"), admin_dashboard_path %></li>
+  <% Typus.applications.each do |app| %>
+    <li><%= link_to _(app), :controller => Typus.application(app).first.tableize %></li>
+  <% end %>
+</ul>

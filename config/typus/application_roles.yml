@@ -9,3 +9,4 @@ admin:
   TaggedLink: create, read, update, delete, fetch_links
   Tagging: create, read, update, delete
   User: create, read, update, delete
+  Reports: index

@@ -1,0 +1,21 @@
+<%
+
+  # attachment = attribute.split('_file_name').first
+
+  if !@item.class.validators.map { |i| i.class }.include?(ActiveModel::Validations::PresenceValidator) && @item.send(attribute).exists?
+    message = _("Remove %{attribute}", :attribute => @item.class.human_attribute_name(attribute).downcase)
+    label_text << <<-HTML
+ <small>#{link_to message, { :action => 'detach',
+                             :id => @item,
+                             :attachment => attribute },
+                             :confirm => _("Are you sure?")}</small>
+    HTML
+  end
+
+%>
+
+<li>
+  <%= form.label attribute, raw(label_text) %>
+  <%= form.file_field attribute, options %>
+  <%= typus_preview(@item, attribute) %>
+</li>

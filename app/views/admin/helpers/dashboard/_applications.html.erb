@@ -1,0 +1,32 @@
+<% applications.each do |app, models| %>
+
+  <table>
+
+    <thead>
+      <tr>
+        <th colspan="2"><%= _(app) %></th>
+      </tr>
+    </thead>
+
+    <% models.each do |model| %>
+
+      <%
+        klass = model.constantize
+        klass_human_name = klass.model_name.human.gsub("/", " ").pluralize
+        admin_items_path = { :controller => "admin/#{klass.to_resource}" }
+      %>
+
+      <tr class="<%= cycle("even", "odd") %>">
+        <td>
+          <%= link_to klass_human_name, admin_items_path %>
+        </td>
+        <td class="right">
+          <%= link_to_if @current_user.can?("create", klass), _("Add"), admin_items_path.merge(:action => "new") %>
+        </td>
+      </tr>
+
+    <% end %>
+
+  </table>
+
+<% end %>

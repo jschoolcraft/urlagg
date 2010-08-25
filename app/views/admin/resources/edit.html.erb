@@ -1,0 +1,28 @@
+<%
+  page_title = _("Edit %{resource}", :resource => @resource.model_name.human)
+  title(page_title)
+%>
+
+<% content_for :sidebar, build_sidebar %>
+
+<h2>
+  <%= page_title %>
+  <small></small>
+</h2>
+
+<%= display_link_to_previous %>
+<%= display_flash_message %>
+<%= typus_block %>
+
+<%
+  options = { :action => "update",
+              :id => @item.id ,
+              :back_to => params[:back_to],
+              :resource => params[:resource],
+              :resource_id => params[:resource_id] }
+  button = _("Save %{resource}", :resource => @resource.model_name.human)
+%>
+
+<%= render form_partial, :options => options, :button => button %>
+
+<%= raw typus_relationships %>

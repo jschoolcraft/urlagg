@@ -1,0 +1,16 @@
+<%
+  page_title = _("Dashboard")
+  title(page_title)
+%>
+
+<% content_for :sidebar do %>
+  <%= render "sidebar" %>
+<% end %>
+
+<h2>
+  <%= page_title %>
+</h2>
+
+<%= applications %>
+
+<%= resources %>

@@ -1,7 +1,7 @@
 Typus.setup do |config|
 
   # Application name.
-  config.admin_title = "urlagg"
+  config.admin_title = "URLAgg"
   # config.admin_sub_title = ""
 
   # Configure the e-mail address which will be shown in Admin::Mailer.
@@ -17,8 +17,8 @@ Typus.setup do |config|
   config.authentication = :session
 
   # Define username and password for http authentication
-  config.username = "admin"
-  config.password = "columbia"
+  # config.username = "admin"
+  # config.password = "columbia"
 
   # Define available languages on the admin interface.
   # config.available_locales = [:en]

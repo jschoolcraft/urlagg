@@ -1,0 +1,24 @@
+<%
+  page_title = _("New %{resource}", :resource => @resource.model_name.human)
+  title(page_title)
+%>
+
+<% content_for :sidebar, build_sidebar %>
+
+<h2>
+  <%= page_title %>
+</h2>
+
+<%= display_link_to_previous %>
+<%= typus_block %>
+
+<%
+  options = { :action => 'create',
+              :back_to => params[:back_to],
+              :selected => params[:selected],
+              :resource => params[:resource],
+              :resource_id => params[:resource_id] }
+  button = _("Create %{resource}", :resource => @resource.model_name.human)
+%>
+
+<%= render form_partial, :options => options, :button => button %>
