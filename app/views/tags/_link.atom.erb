@@ -5,7 +5,7 @@
   } -%>
   <%- if tags.size > 0 -%>
     <div class="related">
-      Also seen in: <%= tags.map { |t| link_to h(t.name), tag_url(t) }.join(', ') -%>
+      Also seen in: <%= tags.map { |t| link_to h(t.name), tag_url(t) }.join(', ').html_safe -%>
     </div>
   <%- end -%>
 </li>
