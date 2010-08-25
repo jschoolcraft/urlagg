@@ -8,7 +8,7 @@ describe PasswordResetsController do
     it "should deliver the password reset instructions email" do
       # expect
       @user = Factory.create(:registered_user)
-      Notifier.should_receive(:deliver_password_reset_instructions).with(@user)
+      Notifier.should_receive(:password_reset_instructions).with(@user).and_return(mock("mailer", :deliver => nil))
       # when
       post :create, :email => @user.email
     end
