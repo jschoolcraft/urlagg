@@ -23,7 +23,7 @@ Urlagg::Application.routes.draw do
   end
 
   resources :password_resets
-  resources :taggings
+  resources :taggings, :only => [:create, :destroy]
   match 'pages/:id' => 'pages#show', :id => 'index'  
   root :to => 'pages#show', :index => 'index'
 end
