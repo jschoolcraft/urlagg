@@ -15,6 +15,7 @@
   <%= yield(:head) %>
   <%= csrf_meta_tag %>
   <meta name="verify-v1" content="v6hD3WoosJkjABTuDeMwXEkZqnDDaSeyIL1SRXB+BiM=" >
+  <%= render :partial => "shared/kiss_metrics" %>
 </head>
 <body id="<%= controller.action_name %>" class="<%= controller.controller_name %>">
   <div id="not_ft">
