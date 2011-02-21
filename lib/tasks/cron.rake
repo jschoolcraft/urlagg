@@ -4,7 +4,7 @@ task :cron => :environment do
   fetch_links_for_all_tags
   # generate sitemap
   # generate_xml_sitemap
-  
+
   # likely want to clean out database daily
   if Time.now.hour == 1
     # clean out the database...
@@ -12,7 +12,7 @@ task :cron => :environment do
 end
 
 def fetch_links_for_all_tags
-  TaggedLink.fetch_links_for_all_tags  
+  TaggedLink.fetch_links_for_all_tags
 end
 
 def generate_xml_sitemap
