@@ -1,5 +1,5 @@
 <li class="<%= cycle('even', 'odd') %>">
-  <%= link_to h(link.title), link.url %>
+  <%= link_to h(link.title), link.url, :rel => "nofollow" %>
   [<%= extract_host(link.url) %>]
   
   <%- tags = link.source_tags.reject { |t|
